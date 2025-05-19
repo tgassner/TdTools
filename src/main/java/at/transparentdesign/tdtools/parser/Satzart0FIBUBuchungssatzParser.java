@@ -20,7 +20,7 @@ public class Satzart0FIBUBuchungssatzParser {
         satzart0FIBUBuchungssatz.setBelegnr(parseIntValue(record, Satzart0FIBUBuchungssatzFields.BELEGNR));
         satzart0FIBUBuchungssatz.setBelegdat(parseDateValue(record, Satzart0FIBUBuchungssatzFields.BELEGDAT));
         satzart0FIBUBuchungssatz.setKost(parseIntValue(record, Satzart0FIBUBuchungssatzFields.KOST));
-        satzart0FIBUBuchungssatz.setUnused1(parseStringValue(record, Satzart0FIBUBuchungssatzFields.UNUSED1));
+        satzart0FIBUBuchungssatz.setUnused1(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.UNUSED1));
         satzart0FIBUBuchungssatz.setKotraeger(parseIntValue(record, Satzart0FIBUBuchungssatzFields.KOTRAEGER));
         satzart0FIBUBuchungssatz.setKomenge(parseDoubleValue(record, Satzart0FIBUBuchungssatzFields.KOMENGE));
         satzart0FIBUBuchungssatz.setKomengenr(parseIntValue(record, Satzart0FIBUBuchungssatzFields.KOMENGENR));
@@ -46,10 +46,10 @@ public class Satzart0FIBUBuchungssatzParser {
         satzart0FIBUBuchungssatz.setLandkz(parseIntValue(record, Satzart0FIBUBuchungssatzFields.LANDKZ));
         satzart0FIBUBuchungssatz.setLkzkurs(parseIntValue(record, Satzart0FIBUBuchungssatzFields.LKZKURS));
         satzart0FIBUBuchungssatz.setLkzfaktor(parseIntValue(record, Satzart0FIBUBuchungssatzFields.LKZFAKTOR));
-        satzart0FIBUBuchungssatz.setText(parseStringValue(record, Satzart0FIBUBuchungssatzFields.TEXT));
-        satzart0FIBUBuchungssatz.setSymbol(parseStringValue(record, Satzart0FIBUBuchungssatzFields.SYMBOL));
-        satzart0FIBUBuchungssatz.setExtbelegnr(parseStringValue(record, Satzart0FIBUBuchungssatzFields.EXTBELEGNR));
-        satzart0FIBUBuchungssatz.setZesskz(parseStringValue(record, Satzart0FIBUBuchungssatzFields.ZESSKZ));
+        satzart0FIBUBuchungssatz.setText(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.TEXT));
+        satzart0FIBUBuchungssatz.setSymbol(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.SYMBOL));
+        satzart0FIBUBuchungssatz.setExtbelegnr(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.EXTBELEGNR));
+        satzart0FIBUBuchungssatz.setZesskz(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.ZESSKZ));
         satzart0FIBUBuchungssatz.setZziel(parseIntValue(record, Satzart0FIBUBuchungssatzFields.ZZIEL));
         satzart0FIBUBuchungssatz.setSkontopz(parseDoubleValue(record, Satzart0FIBUBuchungssatzFields.SKONTOPZ));
         satzart0FIBUBuchungssatz.setSkontotage(parseIntValue(record, Satzart0FIBUBuchungssatzFields.SKONTOTAGE));
@@ -70,7 +70,7 @@ public class Satzart0FIBUBuchungssatzParser {
         satzart0FIBUBuchungssatz.setMahnz(parseIntValue(record, Satzart0FIBUBuchungssatzFields.MAHNZ));
         satzart0FIBUBuchungssatz.setLeistdat(parseDateValue(record, Satzart0FIBUBuchungssatzFields.LEISTDAT));
         satzart0FIBUBuchungssatz.setUvaPeriode(parseIntValue(record, Satzart0FIBUBuchungssatzFields.UVA_PERIODE));
-        satzart0FIBUBuchungssatz.setUidnr(parseStringValue(record, Satzart0FIBUBuchungssatzFields.UIDNR));
+        satzart0FIBUBuchungssatz.setUidnr(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.UIDNR));
         satzart0FIBUBuchungssatz.setSteuerart(parseIntValue(record, Satzart0FIBUBuchungssatzFields.STEUERART));
         satzart0FIBUBuchungssatz.setKorekonto(parseIntValue(record, Satzart0FIBUBuchungssatzFields.KOREKONTO));
         satzart0FIBUBuchungssatz.setErZahlbank(parseIntValue(record, Satzart0FIBUBuchungssatzFields.ER_ZAHLBANK));
@@ -79,10 +79,10 @@ public class Satzart0FIBUBuchungssatzParser {
         satzart0FIBUBuchungssatz.setVstAbzugpz(parseDoubleValue(record, Satzart0FIBUBuchungssatzFields.VST_ABZUGPZ));
         satzart0FIBUBuchungssatz.setZvMahnsp(parseIntValue(record, Satzart0FIBUBuchungssatzFields.ZV_MAHNSP));
         satzart0FIBUBuchungssatz.setErSteukorrKz(parseIntValue(record, Satzart0FIBUBuchungssatzFields.ER_STEUKORR_KZ));
-        satzart0FIBUBuchungssatz.setGegenbuchkz(parseStringValue(record, Satzart0FIBUBuchungssatzFields.GEGENBUCHKZ));
-        satzart0FIBUBuchungssatz.setVerbuchkz(parseStringValue(record, Satzart0FIBUBuchungssatzFields.VERBUCHKZ));
+        satzart0FIBUBuchungssatz.setGegenbuchkz(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.GEGENBUCHKZ));
+        satzart0FIBUBuchungssatz.setVerbuchkz(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.VERBUCHKZ));
         satzart0FIBUBuchungssatz.setUnused3(parseIntValue(record, Satzart0FIBUBuchungssatzFields.UNUSED3));
-        satzart0FIBUBuchungssatz.setUnused4(parseStringValue(record, Satzart0FIBUBuchungssatzFields.UNUSED4));
+        satzart0FIBUBuchungssatz.setUnused4(parseStringValueTrim(record, Satzart0FIBUBuchungssatzFields.UNUSED4));
 
         return satzart0FIBUBuchungssatz;
     }
@@ -93,7 +93,7 @@ public class Satzart0FIBUBuchungssatzParser {
     }
 
     private LocalDate parseDateValue(String record, Satzart0FIBUBuchungssatzFields satzart0FIBUBuchungssatzFields) {
-        String str = parseStringValue(record, satzart0FIBUBuchungssatzFields);
+        String str = parseStringValueTrim(record, satzart0FIBUBuchungssatzFields);
         try {
             return LocalDate.parse(str, DateTimeFormatter.BASIC_ISO_DATE);
         } catch (DateTimeParseException e) {
@@ -102,11 +102,28 @@ public class Satzart0FIBUBuchungssatzParser {
     }
 
     private int parseIntValue(String record, Satzart0FIBUBuchungssatzFields satzart0FIBUBuchungssatzFields)  {
-        String str = parseStringValue(record, satzart0FIBUBuchungssatzFields);
-        if (!NumberUtils.isParsable(str)) {
+        String strValue = parseStringValueTrim(record, satzart0FIBUBuchungssatzFields);
+
+        boolean negativ = false;
+        
+        if (StringUtils.endsWithAny(strValue, "-", "+")) {
+            negativ = StringUtils.equals(StringUtils.substring(strValue, -1), "-");
+            strValue = StringUtils.chop(strValue);
+        }
+
+        if (!NumberUtils.isParsable(strValue)) {
             return 0;
         }
-        return Integer.parseInt(str);
+        
+        int intValue = Integer.parseInt(strValue);
+        if (negativ) {
+            intValue *= -1;
+        }
+        return intValue;
+    }
+
+    private String parseStringValueTrim(String record, Satzart0FIBUBuchungssatzFields satzart0FIBUBuchungssatzFields) {
+        return StringUtils.trim(parseStringValue(record, satzart0FIBUBuchungssatzFields));
     }
 
     private String parseStringValue(String record, Satzart0FIBUBuchungssatzFields satzart0FIBUBuchungssatzFields) {
