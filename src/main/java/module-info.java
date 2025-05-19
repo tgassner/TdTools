@@ -12,4 +12,8 @@ module at.transparentdesign.tdtools {
 
     opens at.transparentdesign.tdtools to javafx.fxml;
     exports at.transparentdesign.tdtools;
+    exports at.transparentdesign.tdtools.loader;
+    opens at.transparentdesign.tdtools.loader to javafx.fxml;
+    exports at.transparentdesign.tdtools.satz;
+    opens at.transparentdesign.tdtools.satz to javafx.fxml;
 }

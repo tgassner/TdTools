@@ -1,4 +1,4 @@
-package at.transparentdesign.tdtools;
+package at.transparentdesign.tdtools.loader;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
