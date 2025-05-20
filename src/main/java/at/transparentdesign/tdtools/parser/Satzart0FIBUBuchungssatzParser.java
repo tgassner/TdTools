@@ -127,7 +127,7 @@ public class Satzart0FIBUBuchungssatzParser {
     }
 
     private String parseStringValue(String record, Satzart0FIBUBuchungssatzFields satzart0FIBUBuchungssatzFields) {
-        return StringUtils.substring(record, satzart0FIBUBuchungssatzFields.getStartPos() - 1, satzart0FIBUBuchungssatzFields.getEndPos());
+        return StringUtils.substring(record, satzart0FIBUBuchungssatzFields.getStartPosBmd55() - 1, satzart0FIBUBuchungssatzFields.getEndPosBmd55());
     }
 
     /*

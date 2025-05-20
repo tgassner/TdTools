@@ -2,76 +2,77 @@ package at.transparentdesign.tdtools.satz;
 
 public enum Satzart0FIBUBuchungssatzFields {
 
-    SATZART(1, "satzart", 1, 1),
-    KONTO(2, "konto", 2, 10),
-    BUCHDAT(3, "buchdat", 11, 18),
-    GKTO(4, "gkto", 19, 27),
-    BELEGNR(5, "belegnr", 28, 36),
-    BELEGDAT(6, "belegdat", 37, 44),
-    KOST(7, "kost", 45, 53),
-    UNUSED1(8, "unused1", 54, 54),
-    KOTRAEGER(9, "kotraeger", 55, 63),
-    KOMENGE(10, "komenge", 64, 81),
-    KOMENGENR(11, "komengenr", 82, 85),
-    KOVARIATOR(12, "kovariator", 86, 90),
-    KOPERIODE(13, "koperiode", 91, 96),
-    KOMONTEILER(14, "komonteiler", 97, 98),
-    MWST(15, "mwst", 99, 103),
-    STEUCOD(16, "steucod", 104, 105),
-    EBKENNZ(17, "ebkennz", 106, 106),
-    BUCOD(18, "bucod", 107, 107),
-    BETRAG(19, "betrag", 108, 125),
-    STEUER(20, "steuer", 126, 143),
-    SKONTO(21, "skonto", 144, 161),
-    OPBETRAG(22, "opbetrag", 162, 179),
-    PERIODE(23, "periode", 180, 181),
-    KURSNR(24, "kursnr", 182, 185),
-    FWKURS(25, "fwkurs", 186, 198),
-    FWFAKTOR(26, "fwfaktor", 199, 204),
-    FWBETRAG(27, "fwbetrag", 205, 222),
-    FWSTEUER(28, "fwsteuer", 223, 240),
-    FWSKONTO(29, "fwskonto", 241, 258),
-    FWOPBETR(30, "fwopbetr", 259, 276),
-    LANDKZ(31, "landkz", 277, 280),
-    LKZKURS(32, "lkzkurs", 281, 293),
-    LKZFAKTOR(33, "lkzfaktor", 294, 299),
-    TEXT(34, "text", 300, 317),
-    SYMBOL(35, "symbol", 318, 319),
-    EXTBELEGNR(36, "extbelegnr", 320, 331),
-    ZESSKZ(37, "zesskz", 332, 332),
-    ZZIEL(38, "zziel", 333, 338),
-    SKONTOPZ(39, "skontopz", 339, 343),
-    SKONTOTAGE(40, "skontotage", 344, 347),
-    SKONTOPZ2(41, "skontopz2", 348, 352),
-    SKONTOTAGE2(42, "skontotage2", 353, 356),
-    VALUTADATUM(43, "valutadatum", 357, 364),
-    WECHSELDATUM(44, "wechseldatum", 365, 372),
-    VERTNR(45, "vertnr", 373, 378),
-    PROVPZ(46, "provpz", 379, 384),
-    AUFTKZ(47, "auftkz", 385, 386),
-    AUFTNR(48, "auftnr", 387, 395),
-    ZMART(49, "zmart", 396, 396),
-    ZMBERICHT(50, "zmbericht", 397, 397),
-    MENGE(51, "menge", 398, 415),
-    BENUTZER(52, "benutzer", 416, 417),
-    BUCHART(53, "buchart", 418, 419),
-    BUCHKZ(54, "buchkz", 420, 421),
-    MAHNZ(55, "mahnz", 422, 425),
-    LEISTDAT(56, "leistdat", 426, 433),
-    UVA_PERIODE(57, "uva-periode", 434, 439),
-    UIDNR(58, "uidnr", 440, 454),
-    STEUERART(59, "steuerart", 455, 456),
-    KOREKONTO(60, "korekonto", 457, 465),
-    ER_ZAHLBANK(61, "er-zahlbank", 466, 467),
-    BAU_STEUCOD(62, "bau-steucod", 468, 469),
-    UNUSED2(63, "unused2", 470, 470),
-    VST_ABZUGPZ(64, "vst-abzugpz", 471, 474),
-    ZV_MAHNSP(65, "zv-mahnsp", 475, 475),
-    ER_STEUKORR_KZ(66, "er-steukorr-kz", 476, 476),
-    GEGENBUCHKZ(67, "gegenbuchkz", 477, 477),
-    VERBUCHKZ(68, "verbuchkz", 478, 478),
-    UNUSED3(69, "unused3", 479, 479),
-    UNUSED4(70, "unused4", 480, 480);
+    SATZART(1, "satzart", "satzart", 1, 1),
+    KONTO(2, "konto", "konto", 2, 10),
+    BUCHDAT(3, "buchdat", "ToDo", 11, 18),
+    GKTO(4, "gkto", "gkonto", 19, 27),
+    BELEGNR(5, "belegnr", "belegnr", 28, 36),
+    BELEGDAT(6, "belegdat", "belegdatum", 37, 44),
+    KOST(7, "kost", "kost", 45, 53),
+    UNUSED1(8, "unused1", "ToDo", 54, 54),
+    KOTRAEGER(9, "kotraeger", "ToDo", 55, 63),
+    KOMENGE(10, "komenge", "ToDo", 64, 81),
+    KOMENGENR(11, "komengenr", "ToDo", 82, 85),
+    KOVARIATOR(12, "kovariator", "ToDo", 86, 90),
+    KOPERIODE(13, "koperiode", "ToDo", 91, 96),
+    KOMONTEILER(14, "komonteiler", "ToDo", 97, 98),
+    MWST(15, "mwst", "prozent", 99, 103),
+    STEUCOD(16, "steucod", "steuercode", 104, 105),
+    EBKENNZ(17, "ebkennz", "ToDo", 106, 106),
+    BUCOD(18, "bucod", "buchcode", 107, 107),
+    BETRAG(19, "betrag", "betrag", 108, 125),
+    STEUER(20, "steuer", "steuer", 126, 143),
+    SKONTO(21, "skonto", "skonto", 144, 161),
+    OPBETRAG(22, "opbetrag", "ToDo", 162, 179),
+    PERIODE(23, "periode", "ToDo", 180, 181),
+    KURSNR(24, "kursnr", "ToDo", 182, 185),
+    FWKURS(25, "fwkurs", "ToDo", 186, 198),
+    FWFAKTOR(26, "fwfaktor", "ToDo", 199, 204),
+    FWBETRAG(27, "fwbetrag", "ToDo", 205, 222),
+    FWSTEUER(28, "fwsteuer", "ToDo", 223, 240),
+    FWSKONTO(29, "fwskonto", "ToDo", 241, 258),
+    FWOPBETR(30, "fwopbetr", "ToDo", 259, 276),
+    LANDKZ(31, "landkz", "ToDo", 277, 280),
+    LKZKURS(32, "lkzkurs", "ToDo", 281, 293),
+    LKZFAKTOR(33, "lkzfaktor", "ToDo", 294, 299),
+    TEXT(34, "text", "text", 300, 317),
+    SYMBOL(35, "symbol", "buchsymbol", 318, 319),
+    EXTBELEGNR(36, "extbelegnr", "ToDo", 320, 331),
+    ZESSKZ(37, "zesskz", "ToDo", 332, 332),
+    ZZIEL(38, "zziel", "ToDo", 333, 338),
+    SKONTOPZ(39, "skontopz", "ToDo", 339, 343),
+    SKONTOTAGE(40, "skontotage", "ToDo", 344, 347),
+    SKONTOPZ2(41, "skontopz2", "ToDo", 348, 352),
+    SKONTOTAGE2(42, "skontotage2", "ToDo", 353, 356),
+    VALUTADATUM(43, "valutadatum", "ToDo", 357, 364),
+    WECHSELDATUM(44, "wechseldatum", "ToDo", 365, 372),
+    VERTNR(45, "vertnr", "ToDo", 373, 378),
+    PROVPZ(46, "provpz", "ToDo", 379, 384),
+    AUFTKZ(47, "auftkz", "ToDo", 385, 386),
+    AUFTNR(48, "auftnr", "ToDo", 387, 395),
+    ZMART(49, "zmart", "ToDo", 396, 396),
+    ZMBERICHT(50, "zmbericht", "ToDo", 397, 397),
+    MENGE(51, "menge", "ToDo", 398, 415),
+    BENUTZER(52, "benutzer", "ToDo", 416, 417),
+    BUCHART(53, "buchart", "ToDo", 418, 419),
+    BUCHKZ(54, "buchkz", "ToDo", 420, 421),
+    MAHNZ(55, "mahnz", "ToDo", 422, 425),
+    LEISTDAT(56, "leistdat", "ToDo", 426, 433),
+    UVA_PERIODE(57, "uva-periode", "ToDo", 434, 439),
+    UIDNR(58, "uidnr", "ToDo", 440, 454),
+    STEUERART(59, "steuerart", "ToDo", 455, 456),
+    KOREKONTO(60, "korekonto", "ToDo", 457, 465),
+    ER_ZAHLBANK(61, "er-zahlbank", "ToDo", 466, 467),
+    BAU_STEUCOD(62, "bau-steucod", "ToDo", 468, 469),
+    UNUSED2(63, "unused2", "ToDo", 470, 470),
+    VST_ABZUGPZ(64, "vst-abzugpz", "ToDo", 471, 474),
+    ZV_MAHNSP(65, "zv-mahnsp", "ToDo", 475, 475),
+    ER_STEUKORR_KZ(66, "er-steukorr-kz", "ToDo", 476, 476),
+    GEGENBUCHKZ(67, "gegenbuchkz", "ToDo", 477, 477),
+    VERBUCHKZ(68, "verbuchkz", "ToDo", 478, 478),
+    UNUSED3(69, "unused3", "ToDo", 479, 479),
+    UNUSED4(70, "unused4", "ToDo", 480, 480),
+    FILIALE(71, "", "filiale", -1, -1);
 
 
     /*
@@ -153,35 +154,41 @@ public enum Satzart0FIBUBuchungssatzFields {
      */
 
     private final int id;
-    private final String headerElement;
-    private final int startPos;
-    private final int endPos;
+    private final String bmd55headerElement;
+    private final String ntcsBookingheaderElement;
+    private final int startPosBmd55;
+    private final int endPosBmd55;
 
-    Satzart0FIBUBuchungssatzFields(int id, String headerElement, int startPos, int endPos) {
+    Satzart0FIBUBuchungssatzFields(int id, String bmd55headerElement, String ntcsBookingheaderElement, int startPosBmd55, int endPos) {
         this.id = id;
-        this.headerElement = headerElement;
-        this.startPos = startPos;
-        this.endPos = endPos;
+        this.bmd55headerElement = bmd55headerElement;
+        this.ntcsBookingheaderElement = ntcsBookingheaderElement;
+        this.startPosBmd55 = startPosBmd55;
+        this.endPosBmd55 = endPos;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getHeaderElement() {
-        return headerElement;
+    public String getBmd55headerElement() {
+        return bmd55headerElement;
     }
 
-    public int getStartPos() {
-        return startPos;
+    public int getStartPosBmd55() {
+        return startPosBmd55;
     }
 
-    public int getEndPos() {
-        return endPos;
+    public int getEndPosBmd55() {
+        return endPosBmd55;
     }
 
     public int getLength() {
-        return (endPos - startPos) + 1;
+        return (endPosBmd55 - startPosBmd55) + 1;
+    }
+
+    public String getNtcsBookingheaderElement() {
+        return ntcsBookingheaderElement;
     }
 
     /*
