@@ -11,6 +11,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.FileBasedConfiguration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
+import org.apache.commons.configuration2.builder.fluent.Configurations;
+import org.apache.commons.configuration2.builder.fluent.FileBasedBuilderParameters;
+import org.apache.commons.configuration2.builder.fluent.Parameters;
+import org.apache.commons.configuration2.convert.DefaultListDelimiterHandler;
+import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -19,17 +28,31 @@ import java.io.IOException;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class HelloController {
+
+    FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
+            new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
+                    .configure(new Parameters().properties()
+                            .setFileName("tdTools.properties")
+                            .setListDelimiterHandler(new DefaultListDelimiterHandler(',')));
+
     @FXML
     public TextField inputFileTextField;
     @FXML
     public TextField outputFileTextField;
     @FXML
     private Label welcomeText;
+
+    @FXML
+    protected void initialize() {
+        inputFileTextField.setText(loadBmd55InputFilePath());
+        outputFileTextField.setText(loadNtscOutputFilePath());
+    }
 
     @FXML
     protected void onDoBookingConvertationClick() {
@@ -50,19 +73,19 @@ public class HelloController {
             return;
         }
 
+        storeBmd55InputFilePath(inputFilePath);
+        storeNtscOutputFilePath(outputFilePath);
+
         FileLoader fileLoader = new Bmd55FileLoader();
         Satzart0FIBUBuchungssatzParser satzart0FIBUBuchungssatzParser = new Satzart0FIBUBuchungssatzParser();
         try {
             List<String> records = fileLoader.loadFileToLines(inputFilePath, true);
-
-            System.out.println("Anzahl an Feldern:" + records.size());
 
             List<Satzart0FIBUBuchungssatz> saetze = new ArrayList<>();
 
             for (String record : records) {
                Satzart0FIBUBuchungssatz satzart0FIBUBuchungssatz = satzart0FIBUBuchungssatzParser.parse(record);
                 saetze.add(satzart0FIBUBuchungssatz);
-               System.out.println(satzart0FIBUBuchungssatz);
             }
 
             AusgangsrechnungWriter ausgangsrechnungWriter = new AusgangsrechnungWriter();
@@ -88,6 +111,14 @@ public class HelloController {
         fileChooser.getExtensionFilters().add(txtFilter);
         FileChooser.ExtensionFilter allFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
         fileChooser.getExtensionFilters().add(allFilter);
+
+        String directoryInGuiString = inputFileTextField.getText();
+        if (StringUtils.isNoneEmpty(directoryInGuiString)) {
+            Path directoryInGuiPath = Paths.get(directoryInGuiString);
+            if (Files.exists(directoryInGuiPath) && Files.isDirectory(directoryInGuiPath)) {
+                fileChooser.setInitialDirectory(new File(directoryInGuiString));
+            }
+        }
 
         File file = fileChooser.showOpenDialog(welcomeText.getScene().getWindow());
         if (file != null) {
@@ -126,4 +157,54 @@ public class HelloController {
         }
     }
 
+    private void storeBmd55InputFilePath(Path bmd55InputFilePath) {
+        storeProperty("BMD55InputFilePath", bmd55InputFilePath.getParent().toString());
+    }
+
+    private void storeNtscOutputFilePath(Path ntscOutputFilePath) {
+        storeProperty("NTSCOutputFilePath", ntscOutputFilePath.getParent().toString());
+    }
+
+    private void storeProperty(String key, String value) {
+        try {
+            //FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
+            //        new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
+            //                .configure(new Parameters().properties()
+            //                        .setFileName("tdTools.properties")
+            //                        .setListDelimiterHandler(new DefaultListDelimiterHandler(',')));
+            Configuration config = getConfiguration();
+            config.setProperty(key, value);
+            builder.save();
+        } catch (ConfigurationException e) {
+            //messageBox(e.getMessage(), "", ExceptionUtils.getStackTrace(e), Alert.AlertType.ERROR);
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            //throw new RuntimeException(e);
+        }
+    }
+
+    private String loadBmd55InputFilePath() {
+        try {
+            return getConfiguration().getString("BMD55InputFilePath");
+        } catch (ConfigurationException e) {
+            return StringUtils.EMPTY;
+        }
+    }
+
+    private String loadNtscOutputFilePath() {
+        try {
+            return getConfiguration().getString("NTSCOutputFilePath");
+        } catch (ConfigurationException e) {
+            return StringUtils.EMPTY;
+        }
+    }
+
+    private Configuration getConfiguration() throws ConfigurationException {
+        //FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
+        //        new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
+        //                .configure(new Parameters().properties()
+        //                        .setFileName("tdTools.properties")
+        //                        .setListDelimiterHandler(new DefaultListDelimiterHandler(',')));
+        return builder.getConfiguration();
+    }
 }

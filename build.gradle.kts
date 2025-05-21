@@ -53,6 +53,7 @@ dependencies {
     implementation("org.apache.commons:commons-collections4:4.5.0")
     implementation("org.apache.commons:commons-configuration2:2.12.0")
     implementation("commons-io:commons-io:2.19.0")
+    implementation("commons-beanutils:commons-beanutils:1.10.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
