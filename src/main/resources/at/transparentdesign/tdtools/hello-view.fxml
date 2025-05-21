@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextField?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="at.transparentdesign.tdtools.HelloController">
+      fx:controller="at.transparentdesign.tdtools.HelloController" minHeight="600" minWidth="800">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
   </padding>
@@ -16,7 +16,11 @@
   <Label fx:id="welcomeText"/>
   <Label>Eingangs Datei:</Label>
   <TextField fx:id="inputFileTextField" />
-  <Button text="Datei suchen" onAction="#onOpenFileButtonClick"/>
+  <Button text="Input Datei suchen" onAction="#onOpenInputFileButtonClick"/>
 
-  <Button text="Hello!" onAction="#onDoBookingConvertationClick"/>
+  <Label>Ausgangs Datei:</Label>
+  <TextField fx:id="outputFileTextField" />
+  <Button text="Output Datei definieren" onAction="#onDefineOutputFileButtonClick"/>
+
+  <Button text="BMB5.5 => NTSC Buchungen konvertieren [STARTEN]" onAction="#onDoBookingConvertationClick"/>
 </VBox>

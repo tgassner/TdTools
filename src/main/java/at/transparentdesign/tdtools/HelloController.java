@@ -5,13 +5,17 @@ import at.transparentdesign.tdtools.loader.FileLoader;
 import at.transparentdesign.tdtools.parser.Satzart0FIBUBuchungssatzParser;
 import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.File;
+import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -21,31 +25,25 @@ public class HelloController {
     @FXML
     public TextField inputFileTextField;
     @FXML
+    public TextField outputFileTextField;
+    @FXML
     private Label welcomeText;
 
     @FXML
     protected void onDoBookingConvertationClick() {
-
-        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-        alert2.setTitle("Keine existierende Datei ausgewählt");
-        alert2.setHeaderText(inputFileTextField.getText());
-        alert2.showAndWait();
+        String inputFileStr = inputFileTextField.getText();
+        Path inputFilePath = Path.of(inputFileStr);
 
         //welcomeText.setText("Welcome to JavaFX Application!");
-        if (!Files.exists(Path.of(inputFileTextField.getText()))) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Keine existierende Datei ausgewählt");
-            alert.setHeaderText("Bitte eine Datei auswählen");
-            alert.setContentText("I have a great message for you!");
-            alert.showAndWait();
+        if (StringUtils.isEmpty(inputFileStr) || !Files.exists(inputFilePath)) {
+            messageBox("Keine existierende Datei ausgewählt", "Bitte eine Datei auswählen", "", Alert.AlertType.INFORMATION);
             return;
         }
-
 
         FileLoader fileLoader = new Bmd55FileLoader();
         Satzart0FIBUBuchungssatzParser satzart0FIBUBuchungssatzParser = new Satzart0FIBUBuchungssatzParser();
         try {
-            List<String> records = fileLoader.loadFileToLines(Path.of("./examples/buerf_20250508-142243_v.txt"), true);
+            List<String> records = fileLoader.loadFileToLines(inputFilePath, true);
 
             System.out.println("Anzahl an Feldern:" + records.size());
 
@@ -62,15 +60,33 @@ public class HelloController {
 
             welcomeText.setText(records.toString());
         } catch (Exception e) {
+            if (MalformedInputException.class.equals(ExceptionUtils.getRootCause(e).getClass())) {
+                messageBox("Ungültige Datei", "I glaub do hots wos mit der Datei oder so..", "", Alert.AlertType.ERROR);
+                return;
+            }
+            messageBox("Allgemeiner Fehler", "Gassi berichten\n" + e.getMessage(), ExceptionUtils.getStackTrace(e), Alert.AlertType.ERROR);
             welcomeText.setText(e.getMessage()); //throw new RuntimeException(e);
         }
     }
 
     @FXML
-    protected void onOpenFileButtonClick() {
+    protected void onOpenInputFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
         File file = fileChooser.showOpenDialog(welcomeText.getScene().getWindow());
         inputFileTextField.setText(file.getAbsolutePath());
     }
+
+    @FXML
+    public void onDefineOutputFileButtonClick(ActionEvent actionEvent) {
+    }
+
+    private void messageBox(String title, String header, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
 }
