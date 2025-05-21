@@ -11,7 +11,7 @@ import static at.transparentdesign.tdtools.satz.SatzArtDefinitionen.AUSGANGSRECH
 
 public class AusgangsrechnungWriter {
 
-    public void write(List<Satzart0FIBUBuchungssatz> satzArten) throws IOException {
+    public void write(List<Satzart0FIBUBuchungssatz> satzArten, String fileName) throws IOException {
         FileWriter fileWriter = new FileWriter("c:\\temp\\aaa.csv"); // TODO!!
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()

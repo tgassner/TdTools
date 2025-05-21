@@ -15,10 +15,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HelloController {
@@ -34,9 +36,17 @@ public class HelloController {
         String inputFileStr = inputFileTextField.getText();
         Path inputFilePath = Path.of(inputFileStr);
 
+        String outputFileStr = outputFileTextField.getText();
+        Path outputFilePath = Path.of(outputFileStr);
+
         //welcomeText.setText("Welcome to JavaFX Application!");
         if (StringUtils.isEmpty(inputFileStr) || !Files.exists(inputFilePath)) {
-            messageBox("Keine existierende Datei ausgewählt", "Bitte eine Datei auswählen", "", Alert.AlertType.INFORMATION);
+            messageBox("Keine existierende input Datei ausgewählt", "Bitte eine Datei auswählen", "", Alert.AlertType.INFORMATION);
+            return;
+        }
+
+        if (StringUtils.isEmpty(outputFileStr) || !isFilenameValid(outputFileStr)) {
+            messageBox("Keine valide Datei ausgewählt", "Bitte eine gültige Datei definieren", "", Alert.AlertType.INFORMATION);
             return;
         }
 
@@ -56,7 +66,7 @@ public class HelloController {
             }
 
             AusgangsrechnungWriter ausgangsrechnungWriter = new AusgangsrechnungWriter();
-            ausgangsrechnungWriter.write(saetze);
+            ausgangsrechnungWriter.write(saetze, outputFileStr);
 
             welcomeText.setText(records.toString());
         } catch (Exception e) {
@@ -72,13 +82,31 @@ public class HelloController {
     @FXML
     protected void onOpenInputFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open File");
+        fileChooser.setTitle("BMD 5.5 Buchungs Datei öffnen");
+
+        FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(txtFilter);
+        FileChooser.ExtensionFilter allFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
+        fileChooser.getExtensionFilters().add(allFilter);
+
         File file = fileChooser.showOpenDialog(welcomeText.getScene().getWindow());
-        inputFileTextField.setText(file.getAbsolutePath());
+        if (file != null) {
+            inputFileTextField.setText(file.getAbsolutePath());
+        }
     }
 
     @FXML
     public void onDefineOutputFileButtonClick(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("NTCS Ziel Datei");
+
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(csvFilter);
+
+        File file = fileChooser.showSaveDialog(welcomeText.getScene().getWindow());
+        if (file != null) {
+            outputFileTextField.setText(file.getAbsolutePath());
+        }
     }
 
     private void messageBox(String title, String header, String content, Alert.AlertType alertType) {
@@ -87,6 +115,15 @@ public class HelloController {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private boolean isFilenameValid(String fileName) {
+        File f = new File(fileName);
+        try {
+            return StringUtils.equals(f.getCanonicalFile().getAbsolutePath(), fileName);
+        } catch (IOException e) {
+            return false;
+        }
     }
 
 }

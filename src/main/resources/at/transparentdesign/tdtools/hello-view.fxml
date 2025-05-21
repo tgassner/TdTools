@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.TextField?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="at.transparentdesign.tdtools.HelloController" minHeight="600" minWidth="800">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Label>Eingangs Datei:</Label>
-  <TextField fx:id="inputFileTextField" />
-  <Button text="Input Datei suchen" onAction="#onOpenInputFileButtonClick"/>
-
-  <Label>Ausgangs Datei:</Label>
-  <TextField fx:id="outputFileTextField" />
-  <Button text="Output Datei definieren" onAction="#onDefineOutputFileButtonClick"/>
-
-  <Button text="BMB5.5 => NTSC Buchungen konvertieren [STARTEN]" onAction="#onDoBookingConvertationClick"/>
-</VBox>
+<HBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.transparentdesign.tdtools.HelloController">
+   <children>
+      <VBox alignment="CENTER" minHeight="600" minWidth="800" prefHeight="635.0" prefWidth="828.0" spacing="20.0">
+        <padding>
+          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
+         <HBox alignment="CENTER" prefHeight="28.0" prefWidth="788.0">
+            <children>
+              <Label prefHeight="17.0" prefWidth="97.0" textAlignment="CENTER">Eingangs Datei:</Label>
+              <TextField fx:id="inputFileTextField" prefHeight="25.0" prefWidth="590.0" />
+              <Button onAction="#onOpenInputFileButtonClick" prefHeight="25.0" prefWidth="91.0" text="durchsuchen" textAlignment="CENTER" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="28.0" prefWidth="788.0">
+            <children>
+            
+              <Label prefHeight="17.0" prefWidth="97.0" textAlignment="CENTER">Ausgangs Datei:</Label>
+              <TextField fx:id="outputFileTextField" prefHeight="25.0" prefWidth="590.0" />
+              <Button onAction="#onDefineOutputFileButtonClick" prefHeight="25.0" prefWidth="91.0" text="durchsuchen" textAlignment="CENTER" />
+            </children>
+         </HBox>
+      
+        <Label fx:id="welcomeText" />
+      
+        <Button onAction="#onDoBookingConvertationClick" prefHeight="99.0" prefWidth="388.0" text="BMB5.5 =&gt; NTSC Buchungen konvertieren [STARTEN]" />
+      </VBox>
+   </children>
+</HBox>
