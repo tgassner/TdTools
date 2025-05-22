@@ -7,9 +7,8 @@ import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
@@ -41,6 +40,10 @@ public class HelloController {
                             .setFileName("tdTools.properties")
                             .setListDelimiterHandler(new DefaultListDelimiterHandler(',')));
 
+    @FXML
+    public TextArea bookingBmd55ToNTSCtextArea;
+    @FXML
+    public TabPane mainBox;
     @FXML
     public TextField inputFileTextField;
     @FXML
