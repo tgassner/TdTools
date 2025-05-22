@@ -3,6 +3,7 @@ package at.transparentdesign.tdtools.writer;
 import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import static at.transparentdesign.tdtools.satz.SatzArtDefinitionen.AUSGANGSRECH
 public class AusgangsrechnungWriter {
 
     public void write(List<Satzart0FIBUBuchungssatz> satzArten, String fileName) throws IOException {
-        FileWriter fileWriter = new FileWriter("c:\\temp\\aaa.csv"); // TODO!!
+        FileWriter fileWriter = new FileWriter(fileName);
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                 .setHeader(AUSGANGSRECHNUNG_SPALTEN_HEADER)
@@ -42,7 +43,7 @@ public class AusgangsrechnungWriter {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw ExceptionUtils.asRuntimeException(e);
         }
     }
 }

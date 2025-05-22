@@ -129,13 +129,4 @@ public class Satzart0FIBUBuchungssatzParser {
     private String parseStringValue(String record, Satzart0FIBUBuchungssatzFields satzart0FIBUBuchungssatzFields) {
         return StringUtils.substring(record, satzart0FIBUBuchungssatzFields.getStartPosBmd55() - 1, satzart0FIBUBuchungssatzFields.getEndPosBmd55());
     }
-
-    /*
-    public static void main(String[] args) {
-        for (Satzart0FIBUBuchungssatzFields satzart0FIBUBuchungssatzField : Satzart0FIBUBuchungssatzFields.values()) {
-            System.out.println(satzart0FIBUBuchungssatzField.getId() + " " +  satzart0FIBUBuchungssatzField.toString() + " " + satzart0FIBUBuchungssatzField.getStartPos() + " " + satzart0FIBUBuchungssatzField.getEndPos());
-        }
-    }
-    */
-
 }

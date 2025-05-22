@@ -6,16 +6,15 @@ import at.transparentdesign.tdtools.parser.Satzart0FIBUBuchungssatzParser;
 import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.InputMethodEvent;
 import javafx.stage.FileChooser;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
-import org.apache.commons.configuration2.builder.fluent.Configurations;
-import org.apache.commons.configuration2.builder.fluent.FileBasedBuilderParameters;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.convert.DefaultListDelimiterHandler;
 import org.apache.commons.configuration2.ex.ConfigurationException;
@@ -29,7 +28,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HelloController {
@@ -48,8 +46,7 @@ public class HelloController {
     public TextField inputFileTextField;
     @FXML
     public TextField outputFileTextField;
-    @FXML
-    private Label welcomeText;
+
 
     @FXML
     protected void initialize() {
@@ -65,16 +62,17 @@ public class HelloController {
         String outputFileStr = outputFileTextField.getText();
         Path outputFilePath = Path.of(outputFileStr);
 
-        //welcomeText.setText("Welcome to JavaFX Application!");
         if (StringUtils.isEmpty(inputFileStr) || !Files.exists(inputFilePath)) {
             messageBox("Keine existierende input Datei ausgewählt", "Bitte eine Datei auswählen", "", Alert.AlertType.INFORMATION);
             return;
         }
 
         if (StringUtils.isEmpty(outputFileStr) || !isFilenameValid(outputFileStr)) {
-            messageBox("Keine valide Datei ausgewählt", "Bitte eine gültige Datei definieren", "", Alert.AlertType.INFORMATION);
+            messageBox("Kein validen NTSC - Ausgabedateinamen  ausgewählt", "Bitte einen gültigen NTSC - Ausgabedateinamen definieren", "", Alert.AlertType.INFORMATION);
             return;
         }
+
+        appendGuiLog("Lade Datei: " + inputFileStr);
 
         storeBmd55InputFilePath(inputFilePath);
         storeNtscOutputFilePath(outputFilePath);
@@ -84,6 +82,8 @@ public class HelloController {
         try {
             List<String> records = fileLoader.loadFileToLines(inputFilePath, true);
 
+            appendGuiLog(records.size() + " Datenzeilen geladen.");
+
             List<Satzart0FIBUBuchungssatz> saetze = new ArrayList<>();
 
             for (String record : records) {
@@ -91,17 +91,18 @@ public class HelloController {
                 saetze.add(satzart0FIBUBuchungssatz);
             }
 
+            appendGuiLog(records.size() + " Datenzeilen konvertiert.");
+
             AusgangsrechnungWriter ausgangsrechnungWriter = new AusgangsrechnungWriter();
             ausgangsrechnungWriter.write(saetze, outputFileStr);
-
-            welcomeText.setText(records.toString());
         } catch (Exception e) {
             if (MalformedInputException.class.equals(ExceptionUtils.getRootCause(e).getClass())) {
+                appendGuiLog("BMD5.5 Datei ungültig. -> Vorgang abgebrochen.");
                 messageBox("Ungültige Datei", "I glaub do hots wos mit der Datei oder so..", "", Alert.AlertType.ERROR);
                 return;
             }
+            appendGuiLog("Allgemeiner Fehler!\nGassi berichten\n\n" + e.getMessage() + "\n\n" +  ExceptionUtils.getStackTrace(e));
             messageBox("Allgemeiner Fehler", "Gassi berichten\n" + e.getMessage(), ExceptionUtils.getStackTrace(e), Alert.AlertType.ERROR);
-            welcomeText.setText(e.getMessage()); //throw new RuntimeException(e);
         }
     }
 
@@ -116,16 +117,31 @@ public class HelloController {
         fileChooser.getExtensionFilters().add(allFilter);
 
         String directoryInGuiString = inputFileTextField.getText();
-        if (StringUtils.isNoneEmpty(directoryInGuiString)) {
+        if (StringUtils.isNotEmpty(directoryInGuiString)) {
             Path directoryInGuiPath = Paths.get(directoryInGuiString);
             if (Files.exists(directoryInGuiPath) && Files.isDirectory(directoryInGuiPath)) {
                 fileChooser.setInitialDirectory(new File(directoryInGuiString));
             }
         }
 
-        File file = fileChooser.showOpenDialog(welcomeText.getScene().getWindow());
+        File file = fileChooser.showOpenDialog(mainBox.getScene().getWindow());
         if (file != null) {
             inputFileTextField.setText(file.getAbsolutePath());
+
+            String directoryOutGuiString = outputFileTextField.getText();
+            while(StringUtils.endsWith(directoryOutGuiString, "\\")) {
+                directoryOutGuiString = StringUtils.removeEnd(directoryOutGuiString, "\\");
+            }
+            if (StringUtils.isNotEmpty(directoryOutGuiString)) {
+                Path directoryOutGuiPath = Paths.get(directoryOutGuiString);
+                if (Files.exists(directoryOutGuiPath) && Files.isDirectory(directoryOutGuiPath)) {
+                    String outputFilename = file.getName();
+                    if (StringUtils.contains(outputFilename, ".")) {
+                        outputFilename = StringUtils.substringBeforeLast(outputFilename, ".");
+                    }
+                    outputFileTextField.setText(directoryOutGuiString + "\\" + outputFilename + ".csv");
+                }
+            }
         }
     }
 
@@ -137,7 +153,15 @@ public class HelloController {
         FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(csvFilter);
 
-        File file = fileChooser.showSaveDialog(welcomeText.getScene().getWindow());
+        String directoryOutGuiString = outputFileTextField.getText();
+        if (StringUtils.isNotEmpty(directoryOutGuiString)) {
+            Path directoryOutGuiPath = Paths.get(directoryOutGuiString);
+            if (Files.exists(directoryOutGuiPath) && Files.isDirectory(directoryOutGuiPath)) {
+                fileChooser.setInitialDirectory(new File(directoryOutGuiString));
+            }
+        }
+
+        File file = fileChooser.showSaveDialog(mainBox.getScene().getWindow());
         if (file != null) {
             outputFileTextField.setText(file.getAbsolutePath());
         }
@@ -170,11 +194,6 @@ public class HelloController {
 
     private void storeProperty(String key, String value) {
         try {
-            //FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
-            //        new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
-            //                .configure(new Parameters().properties()
-            //                        .setFileName("tdTools.properties")
-            //                        .setListDelimiterHandler(new DefaultListDelimiterHandler(',')));
             Configuration config = getConfiguration();
             config.setProperty(key, value);
             builder.save();
@@ -203,11 +222,11 @@ public class HelloController {
     }
 
     private Configuration getConfiguration() throws ConfigurationException {
-        //FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
-        //        new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
-        //                .configure(new Parameters().properties()
-        //                        .setFileName("tdTools.properties")
-        //                        .setListDelimiterHandler(new DefaultListDelimiterHandler(',')));
         return builder.getConfiguration();
+    }
+
+    private void appendGuiLog(String message) {
+        this.bookingBmd55ToNTSCtextArea.appendText(message + "\n");
+        this.bookingBmd55ToNTSCtextArea.setScrollTop(Double.MAX_VALUE);
     }
 }

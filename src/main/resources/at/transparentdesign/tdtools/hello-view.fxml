@@ -27,9 +27,8 @@
                 <TextField fx:id="outputFileTextField" prefHeight="25.0" prefWidth="380.0" />
                 <Button onAction="#onDefineOutputFileButtonClick" prefHeight="25.0" prefWidth="91.0" text="durchsuchen" textAlignment="CENTER" />
             </HBox>
-            <Label fx:id="welcomeText" />
             <Button layoutX="186.0" layoutY="102.0" onAction="#onDoBookingConvertationClick" prefHeight="50.0" prefWidth="388.0" text="BMB5.5 =&gt; NTSC Buchungen konvertieren [STARTEN]" />
-            <TextArea fx:id="bookingBmd55ToNTSCtextArea" editable="false" layoutX="14.0" layoutY="170.0" prefHeight="387.0" prefWidth="770.0" wrapText="true" />
+            <TextArea fx:id="bookingBmd55ToNTSCtextArea" editable="false" layoutX="14.0" layoutY="170.0" prefHeight="387.0" prefWidth="770.0" scrollTop="99999.0" wrapText="true" />
         </AnchorPane>
     </Tab>
     <Tab text="Not used">
