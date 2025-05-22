@@ -28,7 +28,7 @@ public class AusgangsrechnungWriter {
                         satzArt.getKonto(),
                         satzArt.getGkto(),
                         satzArt.getBelegnr(),
-                        satzArt.getBelegdat(),
+                        satzArt.getBelegdatFormated(),
                         satzArt.getSymbol(),
                         satzArt.getBucod(),
                         satzArt.getMwst(),

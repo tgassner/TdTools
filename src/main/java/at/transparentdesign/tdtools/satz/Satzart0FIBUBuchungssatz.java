@@ -1,6 +1,8 @@
 package at.transparentdesign.tdtools.satz;
 
+import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Satzart0FIBUBuchungssatz {
 
@@ -74,6 +76,8 @@ public class Satzart0FIBUBuchungssatz {
     private String verbuchkz;
     private int unused3;
     private String unused4;
+
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
 
     public int getSatzart() {
         return satzart;
@@ -705,80 +709,126 @@ public class Satzart0FIBUBuchungssatz {
         return this;
     }
 
+    public String getBuchdatFormated() {
+        LocalDate lDate = getBuchdat();
+        if (lDate == null) {
+            return StringUtils.EMPTY;
+        }
+        return lDate.format(dateTimeFormatter);
+    }
+
+    ;
+
+    public String getBelegdatFormated() {
+        LocalDate lDate = getBelegdat();
+        if (lDate == null) {
+            return StringUtils.EMPTY;
+        }
+        return lDate.format(dateTimeFormatter);
+    }
+
+    ;
+
+    public String getValutadatumFormated() {
+        LocalDate lDate = getValutadatum();
+        if (lDate == null) {
+            return StringUtils.EMPTY;
+        }
+        return lDate.format(dateTimeFormatter);
+    }
+
+    ;
+
+    public String getWechseldatumFormated() {
+        LocalDate lDate = getWechseldatum();
+        if (lDate == null) {
+            return StringUtils.EMPTY;
+        }
+        return lDate.format(dateTimeFormatter);
+    }
+
+    ;
+
+    public String getLeistdatFormated() {
+        LocalDate lDate = getLeistdat();
+        if (lDate == null) {
+            return StringUtils.EMPTY;
+        }
+        return lDate.format(dateTimeFormatter);
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Satzart0FIBUBuchungssatz{");
-        sb.append("satzart=").append(satzart);
-        sb.append(", konto=").append(konto);
-        sb.append(", buchdat=").append(buchdat);
-        sb.append(", gkto=").append(gkto);
-        sb.append(", belegnr=").append(belegnr);
-        sb.append(", belegdat=").append(belegdat);
-        sb.append(", kost=").append(kost);
-        sb.append(", unused1='").append(unused1).append('\'');
-        sb.append(", kotraeger=").append(kotraeger);
-        sb.append(", komenge=").append(komenge);
-        sb.append(", komengenr=").append(komengenr);
-        sb.append(", kovariator=").append(kovariator);
-        sb.append(", koperiode=").append(koperiode);
-        sb.append(", komonteiler=").append(komonteiler);
-        sb.append(", mwst=").append(mwst);
-        sb.append(", steucod=").append(steucod);
-        sb.append(", ebkennz=").append(ebkennz);
-        sb.append(", bucod=").append(bucod);
-        sb.append(", betrag=").append(betrag);
-        sb.append(", steuer=").append(steuer);
-        sb.append(", skonto=").append(skonto);
-        sb.append(", opbetrag=").append(opbetrag);
-        sb.append(", periode=").append(periode);
-        sb.append(", kursnr=").append(kursnr);
-        sb.append(", fwkurs=").append(fwkurs);
-        sb.append(", fwfaktor=").append(fwfaktor);
-        sb.append(", fwbetrag=").append(fwbetrag);
-        sb.append(", fwsteuer=").append(fwsteuer);
-        sb.append(", fwskonto=").append(fwskonto);
-        sb.append(", fwopbetr=").append(fwopbetr);
-        sb.append(", landkz=").append(landkz);
-        sb.append(", lkzkurs=").append(lkzkurs);
-        sb.append(", lkzfaktor=").append(lkzfaktor);
-        sb.append(", text='").append(text).append('\'');
-        sb.append(", symbol='").append(symbol).append('\'');
-        sb.append(", extbelegnr='").append(extbelegnr).append('\'');
-        sb.append(", zesskz='").append(zesskz).append('\'');
-        sb.append(", zziel=").append(zziel);
-        sb.append(", skontopz=").append(skontopz);
-        sb.append(", skontotage=").append(skontotage);
-        sb.append(", skontopz2=").append(skontopz2);
-        sb.append(", skontotage2=").append(skontotage2);
-        sb.append(", valutadatum=").append(valutadatum);
-        sb.append(", wechseldatum=").append(wechseldatum);
-        sb.append(", vertnr=").append(vertnr);
-        sb.append(", provpz=").append(provpz);
-        sb.append(", auftkz=").append(auftkz);
-        sb.append(", auftnr=").append(auftnr);
-        sb.append(", zmart=").append(zmart);
-        sb.append(", zmbericht=").append(zmbericht);
-        sb.append(", menge=").append(menge);
-        sb.append(", benutzer=").append(benutzer);
-        sb.append(", buchart=").append(buchart);
-        sb.append(", buchkz=").append(buchkz);
-        sb.append(", mahnz=").append(mahnz);
-        sb.append(", leistdat=").append(leistdat);
-        sb.append(", uvaPeriode=").append(uvaPeriode);
-        sb.append(", uidnr='").append(uidnr).append('\'');
-        sb.append(", steuerart=").append(steuerart);
-        sb.append(", korekonto=").append(korekonto);
-        sb.append(", erZahlbank=").append(erZahlbank);
-        sb.append(", bauSteucod=").append(bauSteucod);
-        sb.append(", unused2=").append(unused2);
-        sb.append(", vstAbzugpz=").append(vstAbzugpz);
-        sb.append(", zvMahnsp=").append(zvMahnsp);
-        sb.append(", erSteukorrKz=").append(erSteukorrKz);
-        sb.append(", gegenbuchkz='").append(gegenbuchkz).append('\'');
-        sb.append(", verbuchkz='").append(verbuchkz).append('\'');
-        sb.append(", unused3=").append(unused3);
-        sb.append(", unused4='").append(unused4).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Satzart0FIBUBuchungssatz{" + "satzart=" + satzart +
+                ", konto=" + konto +
+                ", buchdat=" + buchdat +
+                ", gkto=" + gkto +
+                ", belegnr=" + belegnr +
+                ", belegdat=" + belegdat +
+                ", kost=" + kost +
+                ", unused1='" + unused1 + '\'' +
+                ", kotraeger=" + kotraeger +
+                ", komenge=" + komenge +
+                ", komengenr=" + komengenr +
+                ", kovariator=" + kovariator +
+                ", koperiode=" + koperiode +
+                ", komonteiler=" + komonteiler +
+                ", mwst=" + mwst +
+                ", steucod=" + steucod +
+                ", ebkennz=" + ebkennz +
+                ", bucod=" + bucod +
+                ", betrag=" + betrag +
+                ", steuer=" + steuer +
+                ", skonto=" + skonto +
+                ", opbetrag=" + opbetrag +
+                ", periode=" + periode +
+                ", kursnr=" + kursnr +
+                ", fwkurs=" + fwkurs +
+                ", fwfaktor=" + fwfaktor +
+                ", fwbetrag=" + fwbetrag +
+                ", fwsteuer=" + fwsteuer +
+                ", fwskonto=" + fwskonto +
+                ", fwopbetr=" + fwopbetr +
+                ", landkz=" + landkz +
+                ", lkzkurs=" + lkzkurs +
+                ", lkzfaktor=" + lkzfaktor +
+                ", text='" + text + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", extbelegnr='" + extbelegnr + '\'' +
+                ", zesskz='" + zesskz + '\'' +
+                ", zziel=" + zziel +
+                ", skontopz=" + skontopz +
+                ", skontotage=" + skontotage +
+                ", skontopz2=" + skontopz2 +
+                ", skontotage2=" + skontotage2 +
+                ", valutadatum=" + valutadatum +
+                ", wechseldatum=" + wechseldatum +
+                ", vertnr=" + vertnr +
+                ", provpz=" + provpz +
+                ", auftkz=" + auftkz +
+                ", auftnr=" + auftnr +
+                ", zmart=" + zmart +
+                ", zmbericht=" + zmbericht +
+                ", menge=" + menge +
+                ", benutzer=" + benutzer +
+                ", buchart=" + buchart +
+                ", buchkz=" + buchkz +
+                ", mahnz=" + mahnz +
+                ", leistdat=" + leistdat +
+                ", uvaPeriode=" + uvaPeriode +
+                ", uidnr='" + uidnr + '\'' +
+                ", steuerart=" + steuerart +
+                ", korekonto=" + korekonto +
+                ", erZahlbank=" + erZahlbank +
+                ", bauSteucod=" + bauSteucod +
+                ", unused2=" + unused2 +
+                ", vstAbzugpz=" + vstAbzugpz +
+                ", zvMahnsp=" + zvMahnsp +
+                ", erSteukorrKz=" + erSteukorrKz +
+                ", gegenbuchkz='" + gegenbuchkz + '\'' +
+                ", verbuchkz='" + verbuchkz + '\'' +
+                ", unused3=" + unused3 +
+                ", unused4='" + unused4 + '\'' +
+                '}';
     }
 }

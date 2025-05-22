@@ -9,35 +9,30 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<TabPane fx:id="mainBox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="at.transparentdesign.tdtools.HelloController">
+
+<TabPane fx:id="mainBox" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.transparentdesign.tdtools.HelloController">
 
     <Tab text="Buchungen BMD5.5 2 NTSC">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="788.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="800.0">
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
             <HBox alignment="CENTER" layoutY="31.0" prefHeight="28.0" prefWidth="760.0">
                 <Label prefHeight="17.0" prefWidth="97.0" textAlignment="CENTER">Eingangs Datei:</Label>
-                <TextField fx:id="inputFileTextField" prefHeight="25.0" prefWidth="380.0"/>
-                <Button onAction="#onOpenInputFileButtonClick" prefHeight="25.0" prefWidth="91.0"
-                        text="durchsuchen" textAlignment="CENTER"/>
+                <TextField fx:id="inputFileTextField" prefHeight="25.0" prefWidth="380.0" />
+                <Button onAction="#onOpenInputFileButtonClick" prefHeight="25.0" prefWidth="91.0" text="durchsuchen" textAlignment="CENTER" />
             </HBox>
             <HBox alignment="CENTER" layoutY="59.0" prefHeight="28.0" prefWidth="760.0">
                 <Label prefHeight="17.0" prefWidth="97.0" textAlignment="CENTER">Ausgangs Datei:</Label>
-                <TextField fx:id="outputFileTextField" prefHeight="25.0" prefWidth="380.0"/>
-                <Button onAction="#onDefineOutputFileButtonClick" prefHeight="25.0" prefWidth="91.0"
-                        text="durchsuchen" textAlignment="CENTER"/>
+                <TextField fx:id="outputFileTextField" prefHeight="25.0" prefWidth="380.0" />
+                <Button onAction="#onDefineOutputFileButtonClick" prefHeight="25.0" prefWidth="91.0" text="durchsuchen" textAlignment="CENTER" />
             </HBox>
-            <Label fx:id="welcomeText"/>
-            <Button layoutX="186.0" layoutY="102.0" onAction="#onDoBookingConvertationClick" prefHeight="50.0"
-                    prefWidth="388.0" text="BMB5.5 =&gt; NTSC Buchungen konvertieren [STARTEN]"/>
-            <TextArea fx:id="bookingBmd55ToNTSCtextArea" layoutX="14.0" layoutY="165.0" prefHeight="353.0"
-                      prefWidth="760.0"/>
+            <Label fx:id="welcomeText" />
+            <Button layoutX="186.0" layoutY="102.0" onAction="#onDoBookingConvertationClick" prefHeight="50.0" prefWidth="388.0" text="BMB5.5 =&gt; NTSC Buchungen konvertieren [STARTEN]" />
+            <TextArea fx:id="bookingBmd55ToNTSCtextArea" editable="false" layoutX="14.0" layoutY="170.0" prefHeight="387.0" prefWidth="770.0" wrapText="true" />
         </AnchorPane>
     </Tab>
     <Tab text="Not used">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
     </Tab>
 </TabPane>
