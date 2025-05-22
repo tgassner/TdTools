@@ -6,10 +6,8 @@ import at.transparentdesign.tdtools.parser.Satzart0FIBUBuchungssatzParser;
 import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
 import javafx.stage.FileChooser;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
@@ -30,7 +28,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelloController {
+public class TdToolsMainController {
 
     FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
             new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)

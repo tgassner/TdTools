@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("at.transparentdesign.tdtools")
-    mainClass.set("at.transparentdesign.tdtools.HelloApplication")
+    mainClass.set("at.transparentdesign.tdtools.TdToolsApplication")
 }
 
 javafx {
