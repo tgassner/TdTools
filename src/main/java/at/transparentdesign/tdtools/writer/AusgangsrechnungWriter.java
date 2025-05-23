@@ -1,7 +1,6 @@
 package at.transparentdesign.tdtools.writer;
 
-import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
-import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatzFields;
+import at.transparentdesign.tdtools.satz.Bmd55SatzartIBUBuchungssatz;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -13,7 +12,7 @@ import static at.transparentdesign.tdtools.satz.SatzArtDefinitionen.AUSGANGSRECH
 
 public class AusgangsrechnungWriter {
 
-    public void write(List<Satzart0FIBUBuchungssatz> satzArten, String fileName) throws IOException {
+    public void write(List<Bmd55SatzartIBUBuchungssatz> satzArten, String fileName) throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
@@ -23,7 +22,7 @@ public class AusgangsrechnungWriter {
                 .get();
 
         try (CSVPrinter csvPrinter = new CSVPrinter(fileWriter, csvFormat)){
-            for (Satzart0FIBUBuchungssatz satzArt : satzArten) {
+            for (Bmd55SatzartIBUBuchungssatz satzArt : satzArten) {
                 // Write each person's data to the CSV file
                 csvPrinter.printRecord(
                         satzArt.getSatzart(),

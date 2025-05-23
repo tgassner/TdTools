@@ -3,7 +3,7 @@ package at.transparentdesign.tdtools;
 import at.transparentdesign.tdtools.loader.Bmd55FileLoader;
 import at.transparentdesign.tdtools.loader.FileLoader;
 import at.transparentdesign.tdtools.parser.Satzart0FIBUBuchungssatzParser;
-import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
+import at.transparentdesign.tdtools.satz.Bmd55SatzartIBUBuchungssatz;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TdToolsMainController {
 
@@ -44,7 +45,6 @@ public class TdToolsMainController {
     public TextField inputFileTextField;
     @FXML
     public TextField outputFileTextField;
-
 
     @FXML
     protected void initialize() {
@@ -70,6 +70,12 @@ public class TdToolsMainController {
             return;
         }
 
+        if (Files.exists(outputFilePath)) {
+            if (!messageBox("Datei überschriben?", "Die Datei  " + outputFileStr + " wirklich überschreiben?", "", Alert.AlertType.CONFIRMATION)) {
+                return;
+            }
+        }
+
         appendGuiLog("Lade Datei: " + inputFileStr);
 
         storeBmd55InputFilePath(inputFilePath);
@@ -82,11 +88,11 @@ public class TdToolsMainController {
 
             appendGuiLog(records.size() + " Datenzeilen geladen.");
 
-            List<Satzart0FIBUBuchungssatz> saetze = new ArrayList<>();
+            List<Bmd55SatzartIBUBuchungssatz> saetze = new ArrayList<>();
 
             for (String record : records) {
-               Satzart0FIBUBuchungssatz satzart0FIBUBuchungssatz = satzart0FIBUBuchungssatzParser.parse(record);
-                saetze.add(satzart0FIBUBuchungssatz);
+               Bmd55SatzartIBUBuchungssatz bmd55SatzartIBUBuchungssatz = satzart0FIBUBuchungssatzParser.parse(record);
+                saetze.add(bmd55SatzartIBUBuchungssatz);
             }
 
             appendGuiLog(records.size() + " Datenzeilen konvertiert.");
@@ -165,12 +171,13 @@ public class TdToolsMainController {
         }
     }
 
-    private void messageBox(String title, String header, String content, Alert.AlertType alertType) {
+    private boolean messageBox(String title, String header, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
-        alert.showAndWait();
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        return buttonType != null && buttonType.isPresent() && buttonType.get().equals(ButtonType.OK);
     }
 
     private boolean isFilenameValid(String fileName) {
@@ -198,6 +205,7 @@ public class TdToolsMainController {
         } catch (ConfigurationException e) {
             //messageBox(e.getMessage(), "", ExceptionUtils.getStackTrace(e), Alert.AlertType.ERROR);
             e.printStackTrace();
+            // ToDo
             System.out.println(e.getMessage());
             //throw new RuntimeException(e);
         }

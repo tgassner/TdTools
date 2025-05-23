@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Satzart0FIBUBuchungssatz {
+public class Bmd55SatzartIBUBuchungssatz {
 
     private int satzart;
     private int konto;
@@ -83,7 +83,7 @@ public class Satzart0FIBUBuchungssatz {
         return satzart;
     }
 
-    public Satzart0FIBUBuchungssatz setSatzart(int satzart) {
+    public Bmd55SatzartIBUBuchungssatz setSatzart(int satzart) {
         this.satzart = satzart;
         return this;
     }
@@ -92,7 +92,7 @@ public class Satzart0FIBUBuchungssatz {
         return konto;
     }
 
-    public Satzart0FIBUBuchungssatz setKonto(int konto) {
+    public Bmd55SatzartIBUBuchungssatz setKonto(int konto) {
         this.konto = konto;
         return this;
     }
@@ -101,7 +101,7 @@ public class Satzart0FIBUBuchungssatz {
         return buchdat;
     }
 
-    public Satzart0FIBUBuchungssatz setBuchdat(LocalDate buchdat) {
+    public Bmd55SatzartIBUBuchungssatz setBuchdat(LocalDate buchdat) {
         this.buchdat = buchdat;
         return this;
     }
@@ -110,7 +110,7 @@ public class Satzart0FIBUBuchungssatz {
         return gkto;
     }
 
-    public Satzart0FIBUBuchungssatz setGkto(int gkto) {
+    public Bmd55SatzartIBUBuchungssatz setGkto(int gkto) {
         this.gkto = gkto;
         return this;
     }
@@ -119,7 +119,7 @@ public class Satzart0FIBUBuchungssatz {
         return belegnr;
     }
 
-    public Satzart0FIBUBuchungssatz setBelegnr(int belegnr) {
+    public Bmd55SatzartIBUBuchungssatz setBelegnr(int belegnr) {
         this.belegnr = belegnr;
         return this;
     }
@@ -128,7 +128,7 @@ public class Satzart0FIBUBuchungssatz {
         return belegdat;
     }
 
-    public Satzart0FIBUBuchungssatz setBelegdat(LocalDate belegdat) {
+    public Bmd55SatzartIBUBuchungssatz setBelegdat(LocalDate belegdat) {
         this.belegdat = belegdat;
         return this;
     }
@@ -137,7 +137,7 @@ public class Satzart0FIBUBuchungssatz {
         return kost;
     }
 
-    public Satzart0FIBUBuchungssatz setKost(int kost) {
+    public Bmd55SatzartIBUBuchungssatz setKost(int kost) {
         this.kost = kost;
         return this;
     }
@@ -146,7 +146,7 @@ public class Satzart0FIBUBuchungssatz {
         return unused1;
     }
 
-    public Satzart0FIBUBuchungssatz setUnused1(String unused1) {
+    public Bmd55SatzartIBUBuchungssatz setUnused1(String unused1) {
         this.unused1 = unused1;
         return this;
     }
@@ -155,7 +155,7 @@ public class Satzart0FIBUBuchungssatz {
         return kotraeger;
     }
 
-    public Satzart0FIBUBuchungssatz setKotraeger(int kotraeger) {
+    public Bmd55SatzartIBUBuchungssatz setKotraeger(int kotraeger) {
         this.kotraeger = kotraeger;
         return this;
     }
@@ -164,7 +164,7 @@ public class Satzart0FIBUBuchungssatz {
         return komenge;
     }
 
-    public Satzart0FIBUBuchungssatz setKomenge(double komenge) {
+    public Bmd55SatzartIBUBuchungssatz setKomenge(double komenge) {
         this.komenge = komenge;
         return this;
     }
@@ -173,7 +173,7 @@ public class Satzart0FIBUBuchungssatz {
         return komengenr;
     }
 
-    public Satzart0FIBUBuchungssatz setKomengenr(int komengenr) {
+    public Bmd55SatzartIBUBuchungssatz setKomengenr(int komengenr) {
         this.komengenr = komengenr;
         return this;
     }
@@ -182,7 +182,7 @@ public class Satzart0FIBUBuchungssatz {
         return kovariator;
     }
 
-    public Satzart0FIBUBuchungssatz setKovariator(double kovariator) {
+    public Bmd55SatzartIBUBuchungssatz setKovariator(double kovariator) {
         this.kovariator = kovariator;
         return this;
     }
@@ -191,7 +191,7 @@ public class Satzart0FIBUBuchungssatz {
         return koperiode;
     }
 
-    public Satzart0FIBUBuchungssatz setKoperiode(int koperiode) {
+    public Bmd55SatzartIBUBuchungssatz setKoperiode(int koperiode) {
         this.koperiode = koperiode;
         return this;
     }
@@ -200,7 +200,7 @@ public class Satzart0FIBUBuchungssatz {
         return komonteiler;
     }
 
-    public Satzart0FIBUBuchungssatz setKomonteiler(int komonteiler) {
+    public Bmd55SatzartIBUBuchungssatz setKomonteiler(int komonteiler) {
         this.komonteiler = komonteiler;
         return this;
     }
@@ -209,7 +209,7 @@ public class Satzart0FIBUBuchungssatz {
         return mwst;
     }
 
-    public Satzart0FIBUBuchungssatz setMwst(double mwst) {
+    public Bmd55SatzartIBUBuchungssatz setMwst(double mwst) {
         this.mwst = mwst;
         return this;
     }
@@ -218,7 +218,7 @@ public class Satzart0FIBUBuchungssatz {
         return steucod;
     }
 
-    public Satzart0FIBUBuchungssatz setSteucod(int steucod) {
+    public Bmd55SatzartIBUBuchungssatz setSteucod(int steucod) {
         this.steucod = steucod;
         return this;
     }
@@ -227,7 +227,7 @@ public class Satzart0FIBUBuchungssatz {
         return ebkennz;
     }
 
-    public Satzart0FIBUBuchungssatz setEbkennz(int ebkennz) {
+    public Bmd55SatzartIBUBuchungssatz setEbkennz(int ebkennz) {
         this.ebkennz = ebkennz;
         return this;
     }
@@ -236,7 +236,7 @@ public class Satzart0FIBUBuchungssatz {
         return bucod;
     }
 
-    public Satzart0FIBUBuchungssatz setBucod(int bucod) {
+    public Bmd55SatzartIBUBuchungssatz setBucod(int bucod) {
         this.bucod = bucod;
         return this;
     }
@@ -245,7 +245,7 @@ public class Satzart0FIBUBuchungssatz {
         return betrag;
     }
 
-    public Satzart0FIBUBuchungssatz setBetrag(double betrag) {
+    public Bmd55SatzartIBUBuchungssatz setBetrag(double betrag) {
         this.betrag = betrag;
         return this;
     }
@@ -254,7 +254,7 @@ public class Satzart0FIBUBuchungssatz {
         return steuer;
     }
 
-    public Satzart0FIBUBuchungssatz setSteuer(double steuer) {
+    public Bmd55SatzartIBUBuchungssatz setSteuer(double steuer) {
         this.steuer = steuer;
         return this;
     }
@@ -263,7 +263,7 @@ public class Satzart0FIBUBuchungssatz {
         return skonto;
     }
 
-    public Satzart0FIBUBuchungssatz setSkonto(double skonto) {
+    public Bmd55SatzartIBUBuchungssatz setSkonto(double skonto) {
         this.skonto = skonto;
         return this;
     }
@@ -272,7 +272,7 @@ public class Satzart0FIBUBuchungssatz {
         return opbetrag;
     }
 
-    public Satzart0FIBUBuchungssatz setOpbetrag(double opbetrag) {
+    public Bmd55SatzartIBUBuchungssatz setOpbetrag(double opbetrag) {
         this.opbetrag = opbetrag;
         return this;
     }
@@ -281,7 +281,7 @@ public class Satzart0FIBUBuchungssatz {
         return periode;
     }
 
-    public Satzart0FIBUBuchungssatz setPeriode(int periode) {
+    public Bmd55SatzartIBUBuchungssatz setPeriode(int periode) {
         this.periode = periode;
         return this;
     }
@@ -290,7 +290,7 @@ public class Satzart0FIBUBuchungssatz {
         return kursnr;
     }
 
-    public Satzart0FIBUBuchungssatz setKursnr(int kursnr) {
+    public Bmd55SatzartIBUBuchungssatz setKursnr(int kursnr) {
         this.kursnr = kursnr;
         return this;
     }
@@ -299,7 +299,7 @@ public class Satzart0FIBUBuchungssatz {
         return fwkurs;
     }
 
-    public Satzart0FIBUBuchungssatz setFwkurs(int fwkurs) {
+    public Bmd55SatzartIBUBuchungssatz setFwkurs(int fwkurs) {
         this.fwkurs = fwkurs;
         return this;
     }
@@ -308,7 +308,7 @@ public class Satzart0FIBUBuchungssatz {
         return fwfaktor;
     }
 
-    public Satzart0FIBUBuchungssatz setFwfaktor(int fwfaktor) {
+    public Bmd55SatzartIBUBuchungssatz setFwfaktor(int fwfaktor) {
         this.fwfaktor = fwfaktor;
         return this;
     }
@@ -317,7 +317,7 @@ public class Satzart0FIBUBuchungssatz {
         return fwbetrag;
     }
 
-    public Satzart0FIBUBuchungssatz setFwbetrag(double fwbetrag) {
+    public Bmd55SatzartIBUBuchungssatz setFwbetrag(double fwbetrag) {
         this.fwbetrag = fwbetrag;
         return this;
     }
@@ -326,7 +326,7 @@ public class Satzart0FIBUBuchungssatz {
         return fwsteuer;
     }
 
-    public Satzart0FIBUBuchungssatz setFwsteuer(double fwsteuer) {
+    public Bmd55SatzartIBUBuchungssatz setFwsteuer(double fwsteuer) {
         this.fwsteuer = fwsteuer;
         return this;
     }
@@ -335,7 +335,7 @@ public class Satzart0FIBUBuchungssatz {
         return fwskonto;
     }
 
-    public Satzart0FIBUBuchungssatz setFwskonto(double fwskonto) {
+    public Bmd55SatzartIBUBuchungssatz setFwskonto(double fwskonto) {
         this.fwskonto = fwskonto;
         return this;
     }
@@ -344,7 +344,7 @@ public class Satzart0FIBUBuchungssatz {
         return fwopbetr;
     }
 
-    public Satzart0FIBUBuchungssatz setFwopbetr(double fwopbetr) {
+    public Bmd55SatzartIBUBuchungssatz setFwopbetr(double fwopbetr) {
         this.fwopbetr = fwopbetr;
         return this;
     }
@@ -353,7 +353,7 @@ public class Satzart0FIBUBuchungssatz {
         return landkz;
     }
 
-    public Satzart0FIBUBuchungssatz setLandkz(int landkz) {
+    public Bmd55SatzartIBUBuchungssatz setLandkz(int landkz) {
         this.landkz = landkz;
         return this;
     }
@@ -362,7 +362,7 @@ public class Satzart0FIBUBuchungssatz {
         return lkzkurs;
     }
 
-    public Satzart0FIBUBuchungssatz setLkzkurs(int lkzkurs) {
+    public Bmd55SatzartIBUBuchungssatz setLkzkurs(int lkzkurs) {
         this.lkzkurs = lkzkurs;
         return this;
     }
@@ -371,7 +371,7 @@ public class Satzart0FIBUBuchungssatz {
         return lkzfaktor;
     }
 
-    public Satzart0FIBUBuchungssatz setLkzfaktor(int lkzfaktor) {
+    public Bmd55SatzartIBUBuchungssatz setLkzfaktor(int lkzfaktor) {
         this.lkzfaktor = lkzfaktor;
         return this;
     }
@@ -380,7 +380,7 @@ public class Satzart0FIBUBuchungssatz {
         return text;
     }
 
-    public Satzart0FIBUBuchungssatz setText(String text) {
+    public Bmd55SatzartIBUBuchungssatz setText(String text) {
         this.text = text;
         return this;
     }
@@ -389,7 +389,7 @@ public class Satzart0FIBUBuchungssatz {
         return symbol;
     }
 
-    public Satzart0FIBUBuchungssatz setSymbol(String symbol) {
+    public Bmd55SatzartIBUBuchungssatz setSymbol(String symbol) {
         this.symbol = symbol;
         return this;
     }
@@ -398,7 +398,7 @@ public class Satzart0FIBUBuchungssatz {
         return extbelegnr;
     }
 
-    public Satzart0FIBUBuchungssatz setExtbelegnr(String extbelegnr) {
+    public Bmd55SatzartIBUBuchungssatz setExtbelegnr(String extbelegnr) {
         this.extbelegnr = extbelegnr;
         return this;
     }
@@ -407,7 +407,7 @@ public class Satzart0FIBUBuchungssatz {
         return zesskz;
     }
 
-    public Satzart0FIBUBuchungssatz setZesskz(String zesskz) {
+    public Bmd55SatzartIBUBuchungssatz setZesskz(String zesskz) {
         this.zesskz = zesskz;
         return this;
     }
@@ -416,7 +416,7 @@ public class Satzart0FIBUBuchungssatz {
         return zziel;
     }
 
-    public Satzart0FIBUBuchungssatz setZziel(int zziel) {
+    public Bmd55SatzartIBUBuchungssatz setZziel(int zziel) {
         this.zziel = zziel;
         return this;
     }
@@ -425,7 +425,7 @@ public class Satzart0FIBUBuchungssatz {
         return skontopz;
     }
 
-    public Satzart0FIBUBuchungssatz setSkontopz(double skontopz) {
+    public Bmd55SatzartIBUBuchungssatz setSkontopz(double skontopz) {
         this.skontopz = skontopz;
         return this;
     }
@@ -434,7 +434,7 @@ public class Satzart0FIBUBuchungssatz {
         return skontotage;
     }
 
-    public Satzart0FIBUBuchungssatz setSkontotage(int skontotage) {
+    public Bmd55SatzartIBUBuchungssatz setSkontotage(int skontotage) {
         this.skontotage = skontotage;
         return this;
     }
@@ -443,7 +443,7 @@ public class Satzart0FIBUBuchungssatz {
         return skontopz2;
     }
 
-    public Satzart0FIBUBuchungssatz setSkontopz2(double skontopz2) {
+    public Bmd55SatzartIBUBuchungssatz setSkontopz2(double skontopz2) {
         this.skontopz2 = skontopz2;
         return this;
     }
@@ -452,7 +452,7 @@ public class Satzart0FIBUBuchungssatz {
         return skontotage2;
     }
 
-    public Satzart0FIBUBuchungssatz setSkontotage2(int skontotage2) {
+    public Bmd55SatzartIBUBuchungssatz setSkontotage2(int skontotage2) {
         this.skontotage2 = skontotage2;
         return this;
     }
@@ -461,7 +461,7 @@ public class Satzart0FIBUBuchungssatz {
         return valutadatum;
     }
 
-    public Satzart0FIBUBuchungssatz setValutadatum(LocalDate valutadatum) {
+    public Bmd55SatzartIBUBuchungssatz setValutadatum(LocalDate valutadatum) {
         this.valutadatum = valutadatum;
         return this;
     }
@@ -470,7 +470,7 @@ public class Satzart0FIBUBuchungssatz {
         return wechseldatum;
     }
 
-    public Satzart0FIBUBuchungssatz setWechseldatum(LocalDate wechseldatum) {
+    public Bmd55SatzartIBUBuchungssatz setWechseldatum(LocalDate wechseldatum) {
         this.wechseldatum = wechseldatum;
         return this;
     }
@@ -479,7 +479,7 @@ public class Satzart0FIBUBuchungssatz {
         return vertnr;
     }
 
-    public Satzart0FIBUBuchungssatz setVertnr(int vertnr) {
+    public Bmd55SatzartIBUBuchungssatz setVertnr(int vertnr) {
         this.vertnr = vertnr;
         return this;
     }
@@ -488,7 +488,7 @@ public class Satzart0FIBUBuchungssatz {
         return provpz;
     }
 
-    public Satzart0FIBUBuchungssatz setProvpz(double provpz) {
+    public Bmd55SatzartIBUBuchungssatz setProvpz(double provpz) {
         this.provpz = provpz;
         return this;
     }
@@ -497,7 +497,7 @@ public class Satzart0FIBUBuchungssatz {
         return auftkz;
     }
 
-    public Satzart0FIBUBuchungssatz setAuftkz(int auftkz) {
+    public Bmd55SatzartIBUBuchungssatz setAuftkz(int auftkz) {
         this.auftkz = auftkz;
         return this;
     }
@@ -506,7 +506,7 @@ public class Satzart0FIBUBuchungssatz {
         return auftnr;
     }
 
-    public Satzart0FIBUBuchungssatz setAuftnr(int auftnr) {
+    public Bmd55SatzartIBUBuchungssatz setAuftnr(int auftnr) {
         this.auftnr = auftnr;
         return this;
     }
@@ -515,7 +515,7 @@ public class Satzart0FIBUBuchungssatz {
         return zmart;
     }
 
-    public Satzart0FIBUBuchungssatz setZmart(int zmart) {
+    public Bmd55SatzartIBUBuchungssatz setZmart(int zmart) {
         this.zmart = zmart;
         return this;
     }
@@ -524,7 +524,7 @@ public class Satzart0FIBUBuchungssatz {
         return zmbericht;
     }
 
-    public Satzart0FIBUBuchungssatz setZmbericht(int zmbericht) {
+    public Bmd55SatzartIBUBuchungssatz setZmbericht(int zmbericht) {
         this.zmbericht = zmbericht;
         return this;
     }
@@ -533,7 +533,7 @@ public class Satzart0FIBUBuchungssatz {
         return menge;
     }
 
-    public Satzart0FIBUBuchungssatz setMenge(double menge) {
+    public Bmd55SatzartIBUBuchungssatz setMenge(double menge) {
         this.menge = menge;
         return this;
     }
@@ -542,7 +542,7 @@ public class Satzart0FIBUBuchungssatz {
         return benutzer;
     }
 
-    public Satzart0FIBUBuchungssatz setBenutzer(int benutzer) {
+    public Bmd55SatzartIBUBuchungssatz setBenutzer(int benutzer) {
         this.benutzer = benutzer;
         return this;
     }
@@ -551,7 +551,7 @@ public class Satzart0FIBUBuchungssatz {
         return buchart;
     }
 
-    public Satzart0FIBUBuchungssatz setBuchart(int buchart) {
+    public Bmd55SatzartIBUBuchungssatz setBuchart(int buchart) {
         this.buchart = buchart;
         return this;
     }
@@ -560,7 +560,7 @@ public class Satzart0FIBUBuchungssatz {
         return buchkz;
     }
 
-    public Satzart0FIBUBuchungssatz setBuchkz(int buchkz) {
+    public Bmd55SatzartIBUBuchungssatz setBuchkz(int buchkz) {
         this.buchkz = buchkz;
         return this;
     }
@@ -569,7 +569,7 @@ public class Satzart0FIBUBuchungssatz {
         return mahnz;
     }
 
-    public Satzart0FIBUBuchungssatz setMahnz(int mahnz) {
+    public Bmd55SatzartIBUBuchungssatz setMahnz(int mahnz) {
         this.mahnz = mahnz;
         return this;
     }
@@ -578,7 +578,7 @@ public class Satzart0FIBUBuchungssatz {
         return leistdat;
     }
 
-    public Satzart0FIBUBuchungssatz setLeistdat(LocalDate leistdat) {
+    public Bmd55SatzartIBUBuchungssatz setLeistdat(LocalDate leistdat) {
         this.leistdat = leistdat;
         return this;
     }
@@ -587,7 +587,7 @@ public class Satzart0FIBUBuchungssatz {
         return uvaPeriode;
     }
 
-    public Satzart0FIBUBuchungssatz setUvaPeriode(int uvaPeriode) {
+    public Bmd55SatzartIBUBuchungssatz setUvaPeriode(int uvaPeriode) {
         this.uvaPeriode = uvaPeriode;
         return this;
     }
@@ -596,7 +596,7 @@ public class Satzart0FIBUBuchungssatz {
         return uidnr;
     }
 
-    public Satzart0FIBUBuchungssatz setUidnr(String uidnr) {
+    public Bmd55SatzartIBUBuchungssatz setUidnr(String uidnr) {
         this.uidnr = uidnr;
         return this;
     }
@@ -605,7 +605,7 @@ public class Satzart0FIBUBuchungssatz {
         return steuerart;
     }
 
-    public Satzart0FIBUBuchungssatz setSteuerart(int steuerart) {
+    public Bmd55SatzartIBUBuchungssatz setSteuerart(int steuerart) {
         this.steuerart = steuerart;
         return this;
     }
@@ -614,7 +614,7 @@ public class Satzart0FIBUBuchungssatz {
         return korekonto;
     }
 
-    public Satzart0FIBUBuchungssatz setKorekonto(int korekonto) {
+    public Bmd55SatzartIBUBuchungssatz setKorekonto(int korekonto) {
         this.korekonto = korekonto;
         return this;
     }
@@ -623,7 +623,7 @@ public class Satzart0FIBUBuchungssatz {
         return erZahlbank;
     }
 
-    public Satzart0FIBUBuchungssatz setErZahlbank(int erZahlbank) {
+    public Bmd55SatzartIBUBuchungssatz setErZahlbank(int erZahlbank) {
         this.erZahlbank = erZahlbank;
         return this;
     }
@@ -632,7 +632,7 @@ public class Satzart0FIBUBuchungssatz {
         return bauSteucod;
     }
 
-    public Satzart0FIBUBuchungssatz setBauSteucod(int bauSteucod) {
+    public Bmd55SatzartIBUBuchungssatz setBauSteucod(int bauSteucod) {
         this.bauSteucod = bauSteucod;
         return this;
     }
@@ -641,7 +641,7 @@ public class Satzart0FIBUBuchungssatz {
         return unused2;
     }
 
-    public Satzart0FIBUBuchungssatz setUnused2(int unused2) {
+    public Bmd55SatzartIBUBuchungssatz setUnused2(int unused2) {
         this.unused2 = unused2;
         return this;
     }
@@ -650,7 +650,7 @@ public class Satzart0FIBUBuchungssatz {
         return vstAbzugpz;
     }
 
-    public Satzart0FIBUBuchungssatz setVstAbzugpz(double vstAbzugpz) {
+    public Bmd55SatzartIBUBuchungssatz setVstAbzugpz(double vstAbzugpz) {
         this.vstAbzugpz = vstAbzugpz;
         return this;
     }
@@ -659,7 +659,7 @@ public class Satzart0FIBUBuchungssatz {
         return zvMahnsp;
     }
 
-    public Satzart0FIBUBuchungssatz setZvMahnsp(int zvMahnsp) {
+    public Bmd55SatzartIBUBuchungssatz setZvMahnsp(int zvMahnsp) {
         this.zvMahnsp = zvMahnsp;
         return this;
     }
@@ -668,7 +668,7 @@ public class Satzart0FIBUBuchungssatz {
         return erSteukorrKz;
     }
 
-    public Satzart0FIBUBuchungssatz setErSteukorrKz(int erSteukorrKz) {
+    public Bmd55SatzartIBUBuchungssatz setErSteukorrKz(int erSteukorrKz) {
         this.erSteukorrKz = erSteukorrKz;
         return this;
     }
@@ -677,7 +677,7 @@ public class Satzart0FIBUBuchungssatz {
         return gegenbuchkz;
     }
 
-    public Satzart0FIBUBuchungssatz setGegenbuchkz(String gegenbuchkz) {
+    public Bmd55SatzartIBUBuchungssatz setGegenbuchkz(String gegenbuchkz) {
         this.gegenbuchkz = gegenbuchkz;
         return this;
     }
@@ -686,7 +686,7 @@ public class Satzart0FIBUBuchungssatz {
         return verbuchkz;
     }
 
-    public Satzart0FIBUBuchungssatz setVerbuchkz(String verbuchkz) {
+    public Bmd55SatzartIBUBuchungssatz setVerbuchkz(String verbuchkz) {
         this.verbuchkz = verbuchkz;
         return this;
     }
@@ -695,7 +695,7 @@ public class Satzart0FIBUBuchungssatz {
         return unused3;
     }
 
-    public Satzart0FIBUBuchungssatz setUnused3(int unused3) {
+    public Bmd55SatzartIBUBuchungssatz setUnused3(int unused3) {
         this.unused3 = unused3;
         return this;
     }
@@ -704,7 +704,7 @@ public class Satzart0FIBUBuchungssatz {
         return unused4;
     }
 
-    public Satzart0FIBUBuchungssatz setUnused4(String unused4) {
+    public Bmd55SatzartIBUBuchungssatz setUnused4(String unused4) {
         this.unused4 = unused4;
         return this;
     }
