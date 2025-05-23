@@ -1,6 +1,7 @@
 package at.transparentdesign.tdtools.writer;
 
 import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatz;
+import at.transparentdesign.tdtools.satz.Satzart0FIBUBuchungssatzFields;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -27,21 +28,23 @@ public class AusgangsrechnungWriter {
                 csvPrinter.printRecord(
                         satzArt.getSatzart(),
                         satzArt.getKonto(),
+                        satzArt.getBuchdatFormated(),
                         satzArt.getGkto(),
                         satzArt.getBelegnr(),
                         satzArt.getBelegdatFormated(),
-                        satzArt.getSymbol(),
-                        satzArt.getBucod(),
                         satzArt.getMwst(),
                         satzArt.getSteucod(),
+                        satzArt.getBucod(),
                         satzArt.getBetrag(),
                         satzArt.getSteuer(),
+                        satzArt.getSkonto(),
                         satzArt.getText(),
-                        satzArt.getKost(), //Kostenstelle?!?
-                        "" //Filiale ?!?
+                        satzArt.getSymbol(),
+                        satzArt.getExtbelegnr(),
+                        satzArt.getKost(),
+                        ""
                 );
             }
-
         } catch (IOException e) {
             throw ExceptionUtils.asRuntimeException(e);
         }

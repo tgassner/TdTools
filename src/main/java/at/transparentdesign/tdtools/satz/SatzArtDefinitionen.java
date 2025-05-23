@@ -9,18 +9,22 @@ public class SatzArtDefinitionen {
         AUSGANGSRECHNUNG_SPALTEN = List.of(
                 Satzart0FIBUBuchungssatzFields.SATZART,
                 Satzart0FIBUBuchungssatzFields.KONTO,
+                Satzart0FIBUBuchungssatzFields.BUCHDAT,
                 Satzart0FIBUBuchungssatzFields.GKTO,
                 Satzart0FIBUBuchungssatzFields.BELEGNR,
                 Satzart0FIBUBuchungssatzFields.BELEGDAT,
-                Satzart0FIBUBuchungssatzFields.SYMBOL,
-                Satzart0FIBUBuchungssatzFields.BUCOD,
                 Satzart0FIBUBuchungssatzFields.MWST,
                 Satzart0FIBUBuchungssatzFields.STEUCOD,
+                Satzart0FIBUBuchungssatzFields.BUCOD,
                 Satzart0FIBUBuchungssatzFields.BETRAG,
                 Satzart0FIBUBuchungssatzFields.STEUER,
+                Satzart0FIBUBuchungssatzFields.SKONTO,
                 Satzart0FIBUBuchungssatzFields.TEXT,
+                Satzart0FIBUBuchungssatzFields.SYMBOL,
+                Satzart0FIBUBuchungssatzFields.EXTBELEGNR,
                 Satzart0FIBUBuchungssatzFields.KOST,
                 Satzart0FIBUBuchungssatzFields.FILIALE);
+
 
         List<String> header = new ArrayList<>();
         for (Satzart0FIBUBuchungssatzFields field : AUSGANGSRECHNUNG_SPALTEN) {

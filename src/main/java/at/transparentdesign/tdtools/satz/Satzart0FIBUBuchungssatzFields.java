@@ -4,7 +4,7 @@ public enum Satzart0FIBUBuchungssatzFields {
 
     SATZART(1, "satzart", "satzart", 1, 1),
     KONTO(2, "konto", "konto", 2, 10),
-    BUCHDAT(3, "buchdat", "ToDo", 11, 18),
+    BUCHDAT(3, "buchdat", "buchdatum", 11, 18),
     GKTO(4, "gkto", "gkonto", 19, 27),
     BELEGNR(5, "belegnr", "belegnr", 28, 36),
     BELEGDAT(6, "belegdat", "belegdatum", 37, 44),
@@ -37,7 +37,7 @@ public enum Satzart0FIBUBuchungssatzFields {
     LKZFAKTOR(33, "lkzfaktor", "ToDo", 294, 299),
     TEXT(34, "text", "text", 300, 317),
     SYMBOL(35, "symbol", "buchsymbol", 318, 319),
-    EXTBELEGNR(36, "extbelegnr", "ToDo", 320, 331),
+    EXTBELEGNR(36, "extbelegnr", "extbelegnr", 320, 331),
     ZESSKZ(37, "zesskz", "ToDo", 332, 332),
     ZZIEL(38, "zziel", "ToDo", 333, 338),
     SKONTOPZ(39, "skontopz", "ToDo", 339, 343),
