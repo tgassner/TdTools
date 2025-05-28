@@ -9,7 +9,12 @@ import at.transparentdesign.tdtools.satz.NtscFiBuRecord;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.stage.FileChooser;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
@@ -22,7 +27,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -53,12 +57,26 @@ public class TdToolsMainController {
     public Button doBookingConvertationButton;
     @FXML
     public Button saveOutputFileButton;
+    @FXML
+    public Button copyOutputFileToClipboard;
+    @FXML
+    public Button copyInputFileToClipboard;
 
     private List<Bmd55FiBuRecord> bmd55Records;
     private List<NtscFiBuRecord> ntscRecords;
 
     @FXML
     protected void initialize() {
+
+        Image imageCopyToClipboard = new Image("copied-icon.png");
+        ImageView imageViewCopyInputFilePathToClipboard = new ImageView(imageCopyToClipboard);
+        imageViewCopyInputFilePathToClipboard.setFitHeight(16);
+        imageViewCopyInputFilePathToClipboard.setFitWidth(16);
+        this.copyInputFileToClipboard.setGraphic(imageViewCopyInputFilePathToClipboard);
+        ImageView imageViewCopyOutputFilePathToClipboard = new ImageView(imageCopyToClipboard);
+        imageViewCopyOutputFilePathToClipboard.setFitHeight(16);
+        imageViewCopyOutputFilePathToClipboard.setFitWidth(16);
+        this.copyOutputFileToClipboard.setGraphic(imageViewCopyOutputFilePathToClipboard);
     }
 
     @FXML
@@ -184,13 +202,11 @@ public class TdToolsMainController {
         return buttonType != null && buttonType.isPresent() && buttonType.get().equals(ButtonType.OK);
     }
 
-    private boolean isFilenameValid(String fileName) {
-        File f = new File(fileName);
-        try {
-            return StringUtils.equals(f.getCanonicalFile().getAbsolutePath(), fileName);
-        } catch (IOException e) {
-            return false;
-        }
+    private void copyStringToClipboard(String text) {
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(text);
+        clipboard.setContent(content);
     }
 
     private void storeBmd55InputFilePath(Path bmd55InputFilePath) {
@@ -226,5 +242,15 @@ public class TdToolsMainController {
     private void appendGuiLog(String message) {
         this.bookingBmd55ToNTSCtextArea.appendText(message + "\n");
         this.bookingBmd55ToNTSCtextArea.setScrollTop(Double.MAX_VALUE);
+    }
+
+    @FXML
+    public void copyInputFileToClipboard(ActionEvent actionEvent) {
+        copyStringToClipboard(this.inputFileTextField.getText());
+    }
+
+    @FXML
+    public void copyOutputFileToClipboard(ActionEvent actionEvent) {
+        copyStringToClipboard(this.outputFileTextField.getText());
     }
 }
