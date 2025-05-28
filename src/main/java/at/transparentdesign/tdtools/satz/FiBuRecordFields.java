@@ -1,6 +1,6 @@
 package at.transparentdesign.tdtools.satz;
 
-public enum Satzart0FIBUBuchungssatzFields {
+public enum FiBuRecordFields {
 
     SATZART(1, "satzart", "satzart", 1, 1),
     KONTO(2, "konto", "konto", 2, 10),
@@ -159,7 +159,7 @@ public enum Satzart0FIBUBuchungssatzFields {
     private final int startPosBmd55;
     private final int endPosBmd55;
 
-    Satzart0FIBUBuchungssatzFields(int id, String bmd55headerElement, String ntcsBookingheaderElement, int startPosBmd55, int endPos) {
+    FiBuRecordFields(int id, String bmd55headerElement, String ntcsBookingheaderElement, int startPosBmd55, int endPos) {
         this.id = id;
         this.bmd55headerElement = bmd55headerElement;
         this.ntcsBookingheaderElement = ntcsBookingheaderElement;

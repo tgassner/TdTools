@@ -1,18 +1,17 @@
 package at.transparentdesign.tdtools.satz;
 
 import org.apache.commons.lang3.StringUtils;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class NtscSatzartIBUBuchungssatz {
+public class Bmd55FiBuRecord {
 
     private int satzart;
     private int konto;
-    private LocalDate buchdatum;
-    private int gkonto;
+    private LocalDate buchdat;
+    private int gkto;
     private int belegnr;
-    private LocalDate belegdatum;
+    private LocalDate belegdat;
     private int kost;
     private String unused1;
     private int kotraeger;
@@ -21,10 +20,10 @@ public class NtscSatzartIBUBuchungssatz {
     private double kovariator;
     private int koperiode;
     private int komonteiler;
-    private double prozent;
-    private int steuercode;
+    private double mwst;
+    private int steucod;
     private int ebkennz;
-    private int buchcode;
+    private int bucod;
     private double betrag;
     private double steuer;
     private double skonto;
@@ -41,7 +40,7 @@ public class NtscSatzartIBUBuchungssatz {
     private int lkzkurs;
     private int lkzfaktor;
     private String text;
-    private String buchsymbol;
+    private String symbol;
     private String extbelegnr;
     private String zesskz;
     private int zziel;
@@ -84,7 +83,7 @@ public class NtscSatzartIBUBuchungssatz {
         return satzart;
     }
 
-    public NtscSatzartIBUBuchungssatz setSatzart(int satzart) {
+    public Bmd55FiBuRecord setSatzart(int satzart) {
         this.satzart = satzart;
         return this;
     }
@@ -93,26 +92,26 @@ public class NtscSatzartIBUBuchungssatz {
         return konto;
     }
 
-    public NtscSatzartIBUBuchungssatz setKonto(int konto) {
+    public Bmd55FiBuRecord setKonto(int konto) {
         this.konto = konto;
         return this;
     }
 
-    public LocalDate getBuchdatum() {
-        return buchdatum;
+    public LocalDate getBuchdat() {
+        return buchdat;
     }
 
-    public NtscSatzartIBUBuchungssatz setBuchdatum(LocalDate buchdatum) {
-        this.buchdatum = buchdatum;
+    public Bmd55FiBuRecord setBuchdat(LocalDate buchdat) {
+        this.buchdat = buchdat;
         return this;
     }
 
-    public int getGkonto() {
-        return gkonto;
+    public int getGkto() {
+        return gkto;
     }
 
-    public NtscSatzartIBUBuchungssatz setGkonto(int gkonto) {
-        this.gkonto = gkonto;
+    public Bmd55FiBuRecord setGkto(int gkto) {
+        this.gkto = gkto;
         return this;
     }
 
@@ -120,17 +119,17 @@ public class NtscSatzartIBUBuchungssatz {
         return belegnr;
     }
 
-    public NtscSatzartIBUBuchungssatz setBelegnr(int belegnr) {
+    public Bmd55FiBuRecord setBelegnr(int belegnr) {
         this.belegnr = belegnr;
         return this;
     }
 
-    public LocalDate getBelegdatum() {
-        return belegdatum;
+    public LocalDate getBelegdat() {
+        return belegdat;
     }
 
-    public NtscSatzartIBUBuchungssatz setBelegdatum(LocalDate belegdatum) {
-        this.belegdatum = belegdatum;
+    public Bmd55FiBuRecord setBelegdat(LocalDate belegdat) {
+        this.belegdat = belegdat;
         return this;
     }
 
@@ -138,7 +137,7 @@ public class NtscSatzartIBUBuchungssatz {
         return kost;
     }
 
-    public NtscSatzartIBUBuchungssatz setKost(int kost) {
+    public Bmd55FiBuRecord setKost(int kost) {
         this.kost = kost;
         return this;
     }
@@ -147,7 +146,7 @@ public class NtscSatzartIBUBuchungssatz {
         return unused1;
     }
 
-    public NtscSatzartIBUBuchungssatz setUnused1(String unused1) {
+    public Bmd55FiBuRecord setUnused1(String unused1) {
         this.unused1 = unused1;
         return this;
     }
@@ -156,7 +155,7 @@ public class NtscSatzartIBUBuchungssatz {
         return kotraeger;
     }
 
-    public NtscSatzartIBUBuchungssatz setKotraeger(int kotraeger) {
+    public Bmd55FiBuRecord setKotraeger(int kotraeger) {
         this.kotraeger = kotraeger;
         return this;
     }
@@ -165,7 +164,7 @@ public class NtscSatzartIBUBuchungssatz {
         return komenge;
     }
 
-    public NtscSatzartIBUBuchungssatz setKomenge(double komenge) {
+    public Bmd55FiBuRecord setKomenge(double komenge) {
         this.komenge = komenge;
         return this;
     }
@@ -174,7 +173,7 @@ public class NtscSatzartIBUBuchungssatz {
         return komengenr;
     }
 
-    public NtscSatzartIBUBuchungssatz setKomengenr(int komengenr) {
+    public Bmd55FiBuRecord setKomengenr(int komengenr) {
         this.komengenr = komengenr;
         return this;
     }
@@ -183,7 +182,7 @@ public class NtscSatzartIBUBuchungssatz {
         return kovariator;
     }
 
-    public NtscSatzartIBUBuchungssatz setKovariator(double kovariator) {
+    public Bmd55FiBuRecord setKovariator(double kovariator) {
         this.kovariator = kovariator;
         return this;
     }
@@ -192,7 +191,7 @@ public class NtscSatzartIBUBuchungssatz {
         return koperiode;
     }
 
-    public NtscSatzartIBUBuchungssatz setKoperiode(int koperiode) {
+    public Bmd55FiBuRecord setKoperiode(int koperiode) {
         this.koperiode = koperiode;
         return this;
     }
@@ -201,26 +200,26 @@ public class NtscSatzartIBUBuchungssatz {
         return komonteiler;
     }
 
-    public NtscSatzartIBUBuchungssatz setKomonteiler(int komonteiler) {
+    public Bmd55FiBuRecord setKomonteiler(int komonteiler) {
         this.komonteiler = komonteiler;
         return this;
     }
 
-    public double getProzent() {
-        return prozent;
+    public double getMwst() {
+        return mwst;
     }
 
-    public NtscSatzartIBUBuchungssatz setProzent(double prozent) {
-        this.prozent = prozent;
+    public Bmd55FiBuRecord setMwst(double mwst) {
+        this.mwst = mwst;
         return this;
     }
 
-    public int getSteuercode() {
-        return steuercode;
+    public int getSteucod() {
+        return steucod;
     }
 
-    public NtscSatzartIBUBuchungssatz setSteuercode(int steuercode) {
-        this.steuercode = steuercode;
+    public Bmd55FiBuRecord setSteucod(int steucod) {
+        this.steucod = steucod;
         return this;
     }
 
@@ -228,17 +227,17 @@ public class NtscSatzartIBUBuchungssatz {
         return ebkennz;
     }
 
-    public NtscSatzartIBUBuchungssatz setEbkennz(int ebkennz) {
+    public Bmd55FiBuRecord setEbkennz(int ebkennz) {
         this.ebkennz = ebkennz;
         return this;
     }
 
-    public int getBuchcode() {
-        return buchcode;
+    public int getBucod() {
+        return bucod;
     }
 
-    public NtscSatzartIBUBuchungssatz setBuchcode(int buchcode) {
-        this.buchcode = buchcode;
+    public Bmd55FiBuRecord setBucod(int bucod) {
+        this.bucod = bucod;
         return this;
     }
 
@@ -246,7 +245,7 @@ public class NtscSatzartIBUBuchungssatz {
         return betrag;
     }
 
-    public NtscSatzartIBUBuchungssatz setBetrag(double betrag) {
+    public Bmd55FiBuRecord setBetrag(double betrag) {
         this.betrag = betrag;
         return this;
     }
@@ -255,7 +254,7 @@ public class NtscSatzartIBUBuchungssatz {
         return steuer;
     }
 
-    public NtscSatzartIBUBuchungssatz setSteuer(double steuer) {
+    public Bmd55FiBuRecord setSteuer(double steuer) {
         this.steuer = steuer;
         return this;
     }
@@ -264,7 +263,7 @@ public class NtscSatzartIBUBuchungssatz {
         return skonto;
     }
 
-    public NtscSatzartIBUBuchungssatz setSkonto(double skonto) {
+    public Bmd55FiBuRecord setSkonto(double skonto) {
         this.skonto = skonto;
         return this;
     }
@@ -273,7 +272,7 @@ public class NtscSatzartIBUBuchungssatz {
         return opbetrag;
     }
 
-    public NtscSatzartIBUBuchungssatz setOpbetrag(double opbetrag) {
+    public Bmd55FiBuRecord setOpbetrag(double opbetrag) {
         this.opbetrag = opbetrag;
         return this;
     }
@@ -282,7 +281,7 @@ public class NtscSatzartIBUBuchungssatz {
         return periode;
     }
 
-    public NtscSatzartIBUBuchungssatz setPeriode(int periode) {
+    public Bmd55FiBuRecord setPeriode(int periode) {
         this.periode = periode;
         return this;
     }
@@ -291,7 +290,7 @@ public class NtscSatzartIBUBuchungssatz {
         return kursnr;
     }
 
-    public NtscSatzartIBUBuchungssatz setKursnr(int kursnr) {
+    public Bmd55FiBuRecord setKursnr(int kursnr) {
         this.kursnr = kursnr;
         return this;
     }
@@ -300,7 +299,7 @@ public class NtscSatzartIBUBuchungssatz {
         return fwkurs;
     }
 
-    public NtscSatzartIBUBuchungssatz setFwkurs(int fwkurs) {
+    public Bmd55FiBuRecord setFwkurs(int fwkurs) {
         this.fwkurs = fwkurs;
         return this;
     }
@@ -309,7 +308,7 @@ public class NtscSatzartIBUBuchungssatz {
         return fwfaktor;
     }
 
-    public NtscSatzartIBUBuchungssatz setFwfaktor(int fwfaktor) {
+    public Bmd55FiBuRecord setFwfaktor(int fwfaktor) {
         this.fwfaktor = fwfaktor;
         return this;
     }
@@ -318,7 +317,7 @@ public class NtscSatzartIBUBuchungssatz {
         return fwbetrag;
     }
 
-    public NtscSatzartIBUBuchungssatz setFwbetrag(double fwbetrag) {
+    public Bmd55FiBuRecord setFwbetrag(double fwbetrag) {
         this.fwbetrag = fwbetrag;
         return this;
     }
@@ -327,7 +326,7 @@ public class NtscSatzartIBUBuchungssatz {
         return fwsteuer;
     }
 
-    public NtscSatzartIBUBuchungssatz setFwsteuer(double fwsteuer) {
+    public Bmd55FiBuRecord setFwsteuer(double fwsteuer) {
         this.fwsteuer = fwsteuer;
         return this;
     }
@@ -336,7 +335,7 @@ public class NtscSatzartIBUBuchungssatz {
         return fwskonto;
     }
 
-    public NtscSatzartIBUBuchungssatz setFwskonto(double fwskonto) {
+    public Bmd55FiBuRecord setFwskonto(double fwskonto) {
         this.fwskonto = fwskonto;
         return this;
     }
@@ -345,7 +344,7 @@ public class NtscSatzartIBUBuchungssatz {
         return fwopbetr;
     }
 
-    public NtscSatzartIBUBuchungssatz setFwopbetr(double fwopbetr) {
+    public Bmd55FiBuRecord setFwopbetr(double fwopbetr) {
         this.fwopbetr = fwopbetr;
         return this;
     }
@@ -354,7 +353,7 @@ public class NtscSatzartIBUBuchungssatz {
         return landkz;
     }
 
-    public NtscSatzartIBUBuchungssatz setLandkz(int landkz) {
+    public Bmd55FiBuRecord setLandkz(int landkz) {
         this.landkz = landkz;
         return this;
     }
@@ -363,7 +362,7 @@ public class NtscSatzartIBUBuchungssatz {
         return lkzkurs;
     }
 
-    public NtscSatzartIBUBuchungssatz setLkzkurs(int lkzkurs) {
+    public Bmd55FiBuRecord setLkzkurs(int lkzkurs) {
         this.lkzkurs = lkzkurs;
         return this;
     }
@@ -372,7 +371,7 @@ public class NtscSatzartIBUBuchungssatz {
         return lkzfaktor;
     }
 
-    public NtscSatzartIBUBuchungssatz setLkzfaktor(int lkzfaktor) {
+    public Bmd55FiBuRecord setLkzfaktor(int lkzfaktor) {
         this.lkzfaktor = lkzfaktor;
         return this;
     }
@@ -381,17 +380,17 @@ public class NtscSatzartIBUBuchungssatz {
         return text;
     }
 
-    public NtscSatzartIBUBuchungssatz setText(String text) {
+    public Bmd55FiBuRecord setText(String text) {
         this.text = text;
         return this;
     }
 
-    public String getBuchsymbol() {
-        return buchsymbol;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public NtscSatzartIBUBuchungssatz setBuchsymbol(String buchsymbol) {
-        this.buchsymbol = buchsymbol;
+    public Bmd55FiBuRecord setSymbol(String symbol) {
+        this.symbol = symbol;
         return this;
     }
 
@@ -399,7 +398,7 @@ public class NtscSatzartIBUBuchungssatz {
         return extbelegnr;
     }
 
-    public NtscSatzartIBUBuchungssatz setExtbelegnr(String extbelegnr) {
+    public Bmd55FiBuRecord setExtbelegnr(String extbelegnr) {
         this.extbelegnr = extbelegnr;
         return this;
     }
@@ -408,7 +407,7 @@ public class NtscSatzartIBUBuchungssatz {
         return zesskz;
     }
 
-    public NtscSatzartIBUBuchungssatz setZesskz(String zesskz) {
+    public Bmd55FiBuRecord setZesskz(String zesskz) {
         this.zesskz = zesskz;
         return this;
     }
@@ -417,7 +416,7 @@ public class NtscSatzartIBUBuchungssatz {
         return zziel;
     }
 
-    public NtscSatzartIBUBuchungssatz setZziel(int zziel) {
+    public Bmd55FiBuRecord setZziel(int zziel) {
         this.zziel = zziel;
         return this;
     }
@@ -426,7 +425,7 @@ public class NtscSatzartIBUBuchungssatz {
         return skontopz;
     }
 
-    public NtscSatzartIBUBuchungssatz setSkontopz(double skontopz) {
+    public Bmd55FiBuRecord setSkontopz(double skontopz) {
         this.skontopz = skontopz;
         return this;
     }
@@ -435,7 +434,7 @@ public class NtscSatzartIBUBuchungssatz {
         return skontotage;
     }
 
-    public NtscSatzartIBUBuchungssatz setSkontotage(int skontotage) {
+    public Bmd55FiBuRecord setSkontotage(int skontotage) {
         this.skontotage = skontotage;
         return this;
     }
@@ -444,7 +443,7 @@ public class NtscSatzartIBUBuchungssatz {
         return skontopz2;
     }
 
-    public NtscSatzartIBUBuchungssatz setSkontopz2(double skontopz2) {
+    public Bmd55FiBuRecord setSkontopz2(double skontopz2) {
         this.skontopz2 = skontopz2;
         return this;
     }
@@ -453,7 +452,7 @@ public class NtscSatzartIBUBuchungssatz {
         return skontotage2;
     }
 
-    public NtscSatzartIBUBuchungssatz setSkontotage2(int skontotage2) {
+    public Bmd55FiBuRecord setSkontotage2(int skontotage2) {
         this.skontotage2 = skontotage2;
         return this;
     }
@@ -462,7 +461,7 @@ public class NtscSatzartIBUBuchungssatz {
         return valutadatum;
     }
 
-    public NtscSatzartIBUBuchungssatz setValutadatum(LocalDate valutadatum) {
+    public Bmd55FiBuRecord setValutadatum(LocalDate valutadatum) {
         this.valutadatum = valutadatum;
         return this;
     }
@@ -471,7 +470,7 @@ public class NtscSatzartIBUBuchungssatz {
         return wechseldatum;
     }
 
-    public NtscSatzartIBUBuchungssatz setWechseldatum(LocalDate wechseldatum) {
+    public Bmd55FiBuRecord setWechseldatum(LocalDate wechseldatum) {
         this.wechseldatum = wechseldatum;
         return this;
     }
@@ -480,7 +479,7 @@ public class NtscSatzartIBUBuchungssatz {
         return vertnr;
     }
 
-    public NtscSatzartIBUBuchungssatz setVertnr(int vertnr) {
+    public Bmd55FiBuRecord setVertnr(int vertnr) {
         this.vertnr = vertnr;
         return this;
     }
@@ -489,7 +488,7 @@ public class NtscSatzartIBUBuchungssatz {
         return provpz;
     }
 
-    public NtscSatzartIBUBuchungssatz setProvpz(double provpz) {
+    public Bmd55FiBuRecord setProvpz(double provpz) {
         this.provpz = provpz;
         return this;
     }
@@ -498,7 +497,7 @@ public class NtscSatzartIBUBuchungssatz {
         return auftkz;
     }
 
-    public NtscSatzartIBUBuchungssatz setAuftkz(int auftkz) {
+    public Bmd55FiBuRecord setAuftkz(int auftkz) {
         this.auftkz = auftkz;
         return this;
     }
@@ -507,7 +506,7 @@ public class NtscSatzartIBUBuchungssatz {
         return auftnr;
     }
 
-    public NtscSatzartIBUBuchungssatz setAuftnr(int auftnr) {
+    public Bmd55FiBuRecord setAuftnr(int auftnr) {
         this.auftnr = auftnr;
         return this;
     }
@@ -516,7 +515,7 @@ public class NtscSatzartIBUBuchungssatz {
         return zmart;
     }
 
-    public NtscSatzartIBUBuchungssatz setZmart(int zmart) {
+    public Bmd55FiBuRecord setZmart(int zmart) {
         this.zmart = zmart;
         return this;
     }
@@ -525,7 +524,7 @@ public class NtscSatzartIBUBuchungssatz {
         return zmbericht;
     }
 
-    public NtscSatzartIBUBuchungssatz setZmbericht(int zmbericht) {
+    public Bmd55FiBuRecord setZmbericht(int zmbericht) {
         this.zmbericht = zmbericht;
         return this;
     }
@@ -534,7 +533,7 @@ public class NtscSatzartIBUBuchungssatz {
         return menge;
     }
 
-    public NtscSatzartIBUBuchungssatz setMenge(double menge) {
+    public Bmd55FiBuRecord setMenge(double menge) {
         this.menge = menge;
         return this;
     }
@@ -543,7 +542,7 @@ public class NtscSatzartIBUBuchungssatz {
         return benutzer;
     }
 
-    public NtscSatzartIBUBuchungssatz setBenutzer(int benutzer) {
+    public Bmd55FiBuRecord setBenutzer(int benutzer) {
         this.benutzer = benutzer;
         return this;
     }
@@ -552,7 +551,7 @@ public class NtscSatzartIBUBuchungssatz {
         return buchart;
     }
 
-    public NtscSatzartIBUBuchungssatz setBuchart(int buchart) {
+    public Bmd55FiBuRecord setBuchart(int buchart) {
         this.buchart = buchart;
         return this;
     }
@@ -561,7 +560,7 @@ public class NtscSatzartIBUBuchungssatz {
         return buchkz;
     }
 
-    public NtscSatzartIBUBuchungssatz setBuchkz(int buchkz) {
+    public Bmd55FiBuRecord setBuchkz(int buchkz) {
         this.buchkz = buchkz;
         return this;
     }
@@ -570,7 +569,7 @@ public class NtscSatzartIBUBuchungssatz {
         return mahnz;
     }
 
-    public NtscSatzartIBUBuchungssatz setMahnz(int mahnz) {
+    public Bmd55FiBuRecord setMahnz(int mahnz) {
         this.mahnz = mahnz;
         return this;
     }
@@ -579,7 +578,7 @@ public class NtscSatzartIBUBuchungssatz {
         return leistdat;
     }
 
-    public NtscSatzartIBUBuchungssatz setLeistdat(LocalDate leistdat) {
+    public Bmd55FiBuRecord setLeistdat(LocalDate leistdat) {
         this.leistdat = leistdat;
         return this;
     }
@@ -588,7 +587,7 @@ public class NtscSatzartIBUBuchungssatz {
         return uvaPeriode;
     }
 
-    public NtscSatzartIBUBuchungssatz setUvaPeriode(int uvaPeriode) {
+    public Bmd55FiBuRecord setUvaPeriode(int uvaPeriode) {
         this.uvaPeriode = uvaPeriode;
         return this;
     }
@@ -597,7 +596,7 @@ public class NtscSatzartIBUBuchungssatz {
         return uidnr;
     }
 
-    public NtscSatzartIBUBuchungssatz setUidnr(String uidnr) {
+    public Bmd55FiBuRecord setUidnr(String uidnr) {
         this.uidnr = uidnr;
         return this;
     }
@@ -606,7 +605,7 @@ public class NtscSatzartIBUBuchungssatz {
         return steuerart;
     }
 
-    public NtscSatzartIBUBuchungssatz setSteuerart(int steuerart) {
+    public Bmd55FiBuRecord setSteuerart(int steuerart) {
         this.steuerart = steuerart;
         return this;
     }
@@ -615,7 +614,7 @@ public class NtscSatzartIBUBuchungssatz {
         return korekonto;
     }
 
-    public NtscSatzartIBUBuchungssatz setKorekonto(int korekonto) {
+    public Bmd55FiBuRecord setKorekonto(int korekonto) {
         this.korekonto = korekonto;
         return this;
     }
@@ -624,7 +623,7 @@ public class NtscSatzartIBUBuchungssatz {
         return erZahlbank;
     }
 
-    public NtscSatzartIBUBuchungssatz setErZahlbank(int erZahlbank) {
+    public Bmd55FiBuRecord setErZahlbank(int erZahlbank) {
         this.erZahlbank = erZahlbank;
         return this;
     }
@@ -633,7 +632,7 @@ public class NtscSatzartIBUBuchungssatz {
         return bauSteucod;
     }
 
-    public NtscSatzartIBUBuchungssatz setBauSteucod(int bauSteucod) {
+    public Bmd55FiBuRecord setBauSteucod(int bauSteucod) {
         this.bauSteucod = bauSteucod;
         return this;
     }
@@ -642,7 +641,7 @@ public class NtscSatzartIBUBuchungssatz {
         return unused2;
     }
 
-    public NtscSatzartIBUBuchungssatz setUnused2(int unused2) {
+    public Bmd55FiBuRecord setUnused2(int unused2) {
         this.unused2 = unused2;
         return this;
     }
@@ -651,7 +650,7 @@ public class NtscSatzartIBUBuchungssatz {
         return vstAbzugpz;
     }
 
-    public NtscSatzartIBUBuchungssatz setVstAbzugpz(double vstAbzugpz) {
+    public Bmd55FiBuRecord setVstAbzugpz(double vstAbzugpz) {
         this.vstAbzugpz = vstAbzugpz;
         return this;
     }
@@ -660,7 +659,7 @@ public class NtscSatzartIBUBuchungssatz {
         return zvMahnsp;
     }
 
-    public NtscSatzartIBUBuchungssatz setZvMahnsp(int zvMahnsp) {
+    public Bmd55FiBuRecord setZvMahnsp(int zvMahnsp) {
         this.zvMahnsp = zvMahnsp;
         return this;
     }
@@ -669,7 +668,7 @@ public class NtscSatzartIBUBuchungssatz {
         return erSteukorrKz;
     }
 
-    public NtscSatzartIBUBuchungssatz setErSteukorrKz(int erSteukorrKz) {
+    public Bmd55FiBuRecord setErSteukorrKz(int erSteukorrKz) {
         this.erSteukorrKz = erSteukorrKz;
         return this;
     }
@@ -678,7 +677,7 @@ public class NtscSatzartIBUBuchungssatz {
         return gegenbuchkz;
     }
 
-    public NtscSatzartIBUBuchungssatz setGegenbuchkz(String gegenbuchkz) {
+    public Bmd55FiBuRecord setGegenbuchkz(String gegenbuchkz) {
         this.gegenbuchkz = gegenbuchkz;
         return this;
     }
@@ -687,7 +686,7 @@ public class NtscSatzartIBUBuchungssatz {
         return verbuchkz;
     }
 
-    public NtscSatzartIBUBuchungssatz setVerbuchkz(String verbuchkz) {
+    public Bmd55FiBuRecord setVerbuchkz(String verbuchkz) {
         this.verbuchkz = verbuchkz;
         return this;
     }
@@ -696,7 +695,7 @@ public class NtscSatzartIBUBuchungssatz {
         return unused3;
     }
 
-    public NtscSatzartIBUBuchungssatz setUnused3(int unused3) {
+    public Bmd55FiBuRecord setUnused3(int unused3) {
         this.unused3 = unused3;
         return this;
     }
@@ -705,13 +704,13 @@ public class NtscSatzartIBUBuchungssatz {
         return unused4;
     }
 
-    public NtscSatzartIBUBuchungssatz setUnused4(String unused4) {
+    public Bmd55FiBuRecord setUnused4(String unused4) {
         this.unused4 = unused4;
         return this;
     }
 
     public String getBuchdatFormated() {
-        LocalDate lDate = getBuchdatum();
+        LocalDate lDate = getBuchdat();
         if (lDate == null) {
             return StringUtils.EMPTY;
         }
@@ -721,7 +720,7 @@ public class NtscSatzartIBUBuchungssatz {
     ;
 
     public String getBelegdatFormated() {
-        LocalDate lDate = getBelegdatum();
+        LocalDate lDate = getBelegdat();
         if (lDate == null) {
             return StringUtils.EMPTY;
         }
@@ -762,10 +761,10 @@ public class NtscSatzartIBUBuchungssatz {
     public String toString() {
         return "Satzart0FIBUBuchungssatz{" + "satzart=" + satzart +
                 ", konto=" + konto +
-                ", buchdat=" + buchdatum +
-                ", gkto=" + gkonto +
+                ", buchdat=" + buchdat +
+                ", gkto=" + gkto +
                 ", belegnr=" + belegnr +
-                ", belegdat=" + belegdatum +
+                ", belegdat=" + belegdat +
                 ", kost=" + kost +
                 ", unused1='" + unused1 + '\'' +
                 ", kotraeger=" + kotraeger +
@@ -774,10 +773,10 @@ public class NtscSatzartIBUBuchungssatz {
                 ", kovariator=" + kovariator +
                 ", koperiode=" + koperiode +
                 ", komonteiler=" + komonteiler +
-                ", mwst=" + prozent +
-                ", steucod=" + steuercode +
+                ", mwst=" + mwst +
+                ", steucod=" + steucod +
                 ", ebkennz=" + ebkennz +
-                ", bucod=" + buchcode +
+                ", bucod=" + bucod +
                 ", betrag=" + betrag +
                 ", steuer=" + steuer +
                 ", skonto=" + skonto +
@@ -794,7 +793,7 @@ public class NtscSatzartIBUBuchungssatz {
                 ", lkzkurs=" + lkzkurs +
                 ", lkzfaktor=" + lkzfaktor +
                 ", text='" + text + '\'' +
-                ", symbol='" + buchsymbol + '\'' +
+                ", symbol='" + symbol + '\'' +
                 ", extbelegnr='" + extbelegnr + '\'' +
                 ", zesskz='" + zesskz + '\'' +
                 ", zziel=" + zziel +

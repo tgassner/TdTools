@@ -1,9 +1,11 @@
 package at.transparentdesign.tdtools;
 
+import at.transparentdesign.tdtools.converter.Bmd55ToNtscConverter;
 import at.transparentdesign.tdtools.loader.Bmd55FileLoader;
 import at.transparentdesign.tdtools.loader.FileLoader;
-import at.transparentdesign.tdtools.parser.Satzart0FIBUBuchungssatzParser;
-import at.transparentdesign.tdtools.satz.Bmd55SatzartIBUBuchungssatz;
+import at.transparentdesign.tdtools.parser.Satzart0FiBuBuchungssatzParser;
+import at.transparentdesign.tdtools.satz.Bmd55FiBuRecord;
+import at.transparentdesign.tdtools.satz.NtscFiBuRecord;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,60 +47,73 @@ public class TdToolsMainController {
     public TextField inputFileTextField;
     @FXML
     public TextField outputFileTextField;
+    @FXML
+    public Button loadInputFileButton;
+    @FXML
+    public Button doBookingConvertationButton;
+    @FXML
+    public Button saveOutputFileButton;
+
+    private List<Bmd55FiBuRecord> bmd55Records;
+    private List<NtscFiBuRecord> ntscRecords;
 
     @FXML
     protected void initialize() {
-        inputFileTextField.setText(loadBmd55InputFilePath());
-        outputFileTextField.setText(loadNtscOutputFilePath());
     }
 
     @FXML
     protected void onDoBookingConvertationClick() {
-        String inputFileStr = inputFileTextField.getText();
-        Path inputFilePath = Path.of(inputFileStr);
+        Bmd55ToNtscConverter converter = new Bmd55ToNtscConverter();
+        ntscRecords = converter.convert(bmd55Records);
+        appendGuiLog(this.ntscRecords.size() + " Datenzeilen konvertiert.");
+        this.doBookingConvertationButton.setDisable(true);
+        this.saveOutputFileButton.setDisable(false);
+        this.outputFileTextField.setText(StringUtils.EMPTY);
+    }
 
-        String outputFileStr = outputFileTextField.getText();
-        Path outputFilePath = Path.of(outputFileStr);
+    @FXML
+    protected void onLoadInputFileButtonClick() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("BMD 5.5 Buchungs Datei öffnen");
 
-        if (StringUtils.isEmpty(inputFileStr) || !Files.exists(inputFilePath)) {
-            messageBox("Keine existierende input Datei ausgewählt", "Bitte eine Datei auswählen", "", Alert.AlertType.INFORMATION);
-            return;
-        }
+        FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(txtFilter);
+        FileChooser.ExtensionFilter allFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
+        fileChooser.getExtensionFilters().add(allFilter);
 
-        if (StringUtils.isEmpty(outputFileStr) || !isFilenameValid(outputFileStr)) {
-            messageBox("Kein validen NTSC - Ausgabedateinamen  ausgewählt", "Bitte einen gültigen NTSC - Ausgabedateinamen definieren", "", Alert.AlertType.INFORMATION);
-            return;
-        }
-
-        if (Files.exists(outputFilePath)) {
-            if (!messageBox("Datei überschriben?", "Die Datei  " + outputFileStr + " wirklich überschreiben?", "", Alert.AlertType.CONFIRMATION)) {
-                return;
+        String directoryInGuiString = loadBmd55InputFilePath();
+        if (StringUtils.isNotEmpty(directoryInGuiString)) {
+            Path directoryInGuiPath = Paths.get(directoryInGuiString);
+            if (Files.exists(directoryInGuiPath) && Files.isDirectory(directoryInGuiPath)) {
+                fileChooser.setInitialDirectory(new File(directoryInGuiString));
             }
         }
 
-        appendGuiLog("Lade Datei: " + inputFileStr);
+        File file = fileChooser.showOpenDialog(mainBox.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
 
-        storeBmd55InputFilePath(inputFilePath);
-        storeNtscOutputFilePath(outputFilePath);
+        Path inputPath = Path.of(file.getAbsolutePath());
+
+        appendGuiLog("Lade Datei: " + file.getAbsolutePath());
 
         FileLoader fileLoader = new Bmd55FileLoader();
-        Satzart0FIBUBuchungssatzParser satzart0FIBUBuchungssatzParser = new Satzart0FIBUBuchungssatzParser();
+
+        List<String> records;
         try {
-            List<String> records = fileLoader.loadFileToLines(inputFilePath, true);
+            records = fileLoader.loadFileToLines(inputPath, true);
+            appendGuiLog(records.size() + " Datenzeilen gelesen.");
 
-            appendGuiLog(records.size() + " Datenzeilen geladen.");
+            bmd55Records = new ArrayList<>();
 
-            List<Bmd55SatzartIBUBuchungssatz> saetze = new ArrayList<>();
+            Satzart0FiBuBuchungssatzParser satzart0FIBUBuchungssatzParser = new Satzart0FiBuBuchungssatzParser();
 
             for (String record : records) {
-               Bmd55SatzartIBUBuchungssatz bmd55SatzartIBUBuchungssatz = satzart0FIBUBuchungssatzParser.parse(record);
-                saetze.add(bmd55SatzartIBUBuchungssatz);
+                Bmd55FiBuRecord bmd55FiBuRecord = satzart0FIBUBuchungssatzParser.parse(record);
+                bmd55Records.add(bmd55FiBuRecord);
             }
 
-            appendGuiLog(records.size() + " Datenzeilen konvertiert.");
-
-            AusgangsrechnungWriter ausgangsrechnungWriter = new AusgangsrechnungWriter();
-            ausgangsrechnungWriter.write(saetze, outputFileStr);
         } catch (Exception e) {
             if (MalformedInputException.class.equals(ExceptionUtils.getRootCause(e).getClass())) {
                 appendGuiLog("BMD5.5 Datei ungültig. -> Vorgang abgebrochen.");
@@ -108,67 +123,56 @@ public class TdToolsMainController {
             appendGuiLog("Allgemeiner Fehler!\nGassi berichten\n\n" + e.getMessage() + "\n\n" +  ExceptionUtils.getStackTrace(e));
             messageBox("Allgemeiner Fehler", "Gassi berichten\n" + e.getMessage(), ExceptionUtils.getStackTrace(e), Alert.AlertType.ERROR);
         }
+
+        appendGuiLog(bmd55Records.size() + " Datenzeilen erkannt.");
+
+        this.inputFileTextField.setText(file.getAbsolutePath());
+        this.outputFileTextField.setText(StringUtils.EMPTY);
+        storeBmd55InputFilePath(inputPath);
+        this.doBookingConvertationButton.setDisable(false);
+        this.saveOutputFileButton.setDisable(true);
     }
 
     @FXML
-    protected void onOpenInputFileButtonClick() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("BMD 5.5 Buchungs Datei öffnen");
-
-        FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(txtFilter);
-        FileChooser.ExtensionFilter allFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
-        fileChooser.getExtensionFilters().add(allFilter);
-
-        String directoryInGuiString = inputFileTextField.getText();
-        if (StringUtils.isNotEmpty(directoryInGuiString)) {
-            Path directoryInGuiPath = Paths.get(directoryInGuiString);
-            if (Files.exists(directoryInGuiPath) && Files.isDirectory(directoryInGuiPath)) {
-                fileChooser.setInitialDirectory(new File(directoryInGuiString));
-            }
-        }
-
-        File file = fileChooser.showOpenDialog(mainBox.getScene().getWindow());
-        if (file != null) {
-            inputFileTextField.setText(file.getAbsolutePath());
-
-            String directoryOutGuiString = outputFileTextField.getText();
-            while(StringUtils.endsWith(directoryOutGuiString, "\\")) {
-                directoryOutGuiString = StringUtils.removeEnd(directoryOutGuiString, "\\");
-            }
-            if (StringUtils.isNotEmpty(directoryOutGuiString)) {
-                Path directoryOutGuiPath = Paths.get(directoryOutGuiString);
-                if (Files.exists(directoryOutGuiPath) && Files.isDirectory(directoryOutGuiPath)) {
-                    String outputFilename = file.getName();
-                    if (StringUtils.contains(outputFilename, ".")) {
-                        outputFilename = StringUtils.substringBeforeLast(outputFilename, ".");
-                    }
-                    outputFileTextField.setText(directoryOutGuiString + "\\" + outputFilename + ".csv");
-                }
-            }
-        }
-    }
-
-    @FXML
-    public void onDefineOutputFileButtonClick(ActionEvent actionEvent) {
+    public void onSaveOutputFileButtonClick(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("NTCS Ziel Datei");
 
         FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(csvFilter);
 
-        String directoryOutGuiString = outputFileTextField.getText();
-        if (StringUtils.isNotEmpty(directoryOutGuiString)) {
-            Path directoryOutGuiPath = Paths.get(directoryOutGuiString);
-            if (Files.exists(directoryOutGuiPath) && Files.isDirectory(directoryOutGuiPath)) {
-                fileChooser.setInitialDirectory(new File(directoryOutGuiString));
+        String inputFileString = this.inputFileTextField.getText();
+        if (StringUtils.isNotEmpty(inputFileString)) {
+            Path directoryOutGuiPath = Paths.get(inputFileString);
+            Path parent = directoryOutGuiPath.getParent();
+            if (Files.exists(parent) && Files.isDirectory(parent)) {
+                String outputFilename = directoryOutGuiPath.getFileName().toString();
+                if (StringUtils.contains(outputFilename, ".")) {
+                    outputFilename = StringUtils.substringBeforeLast(outputFilename, ".");
+                }
+                fileChooser.setInitialDirectory(new File(parent.toString()));
+                fileChooser.setInitialFileName(outputFilename + ".csv");
             }
         }
 
         File file = fileChooser.showSaveDialog(mainBox.getScene().getWindow());
-        if (file != null) {
-            outputFileTextField.setText(file.getAbsolutePath());
+        if (file == null) {
+            return;
         }
+
+        Path outputFilePath = Path.of(file.getAbsolutePath());
+
+        AusgangsrechnungWriter ausgangsrechnungWriter = new AusgangsrechnungWriter();
+        try {
+            ausgangsrechnungWriter.write(ntscRecords, file.getAbsolutePath());
+        } catch (Exception e) {
+            appendGuiLog(e);
+        }
+
+        appendGuiLog(ntscRecords.size() + " Datensätze geschrieben");
+        appendGuiLog("Datei geschrieben: " + outputFilePath.toAbsolutePath());
+
+        outputFileTextField.setText(file.getAbsolutePath());
     }
 
     private boolean messageBox(String title, String header, String content, Alert.AlertType alertType) {
@@ -193,21 +197,13 @@ public class TdToolsMainController {
         storeProperty("BMD55InputFilePath", bmd55InputFilePath.getParent().toString());
     }
 
-    private void storeNtscOutputFilePath(Path ntscOutputFilePath) {
-        storeProperty("NTSCOutputFilePath", ntscOutputFilePath.getParent().toString());
-    }
-
     private void storeProperty(String key, String value) {
         try {
             Configuration config = getConfiguration();
             config.setProperty(key, value);
             builder.save();
         } catch (ConfigurationException e) {
-            //messageBox(e.getMessage(), "", ExceptionUtils.getStackTrace(e), Alert.AlertType.ERROR);
-            e.printStackTrace();
-            // ToDo
-            System.out.println(e.getMessage());
-            //throw new RuntimeException(e);
+            // Schlucken.. what shells
         }
     }
 
@@ -219,16 +215,12 @@ public class TdToolsMainController {
         }
     }
 
-    private String loadNtscOutputFilePath() {
-        try {
-            return getConfiguration().getString("NTSCOutputFilePath");
-        } catch (ConfigurationException e) {
-            return StringUtils.EMPTY;
-        }
-    }
-
     private Configuration getConfiguration() throws ConfigurationException {
         return builder.getConfiguration();
+    }
+
+    private void appendGuiLog(Exception e) {
+        appendGuiLog("ERROR" + "\n" + e.getMessage() + "\n" + ExceptionUtils.getStackTrace(e) + "\n");
     }
 
     private void appendGuiLog(String message) {

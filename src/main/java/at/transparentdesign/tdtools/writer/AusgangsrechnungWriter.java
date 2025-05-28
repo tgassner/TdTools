@@ -1,6 +1,6 @@
 package at.transparentdesign.tdtools.writer;
 
-import at.transparentdesign.tdtools.satz.Bmd55SatzartIBUBuchungssatz;
+import at.transparentdesign.tdtools.satz.NtscFiBuRecord;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -12,7 +12,7 @@ import static at.transparentdesign.tdtools.satz.SatzArtDefinitionen.AUSGANGSRECH
 
 public class AusgangsrechnungWriter {
 
-    public void write(List<Bmd55SatzartIBUBuchungssatz> satzArten, String fileName) throws IOException {
+    public void write(List<NtscFiBuRecord> satzArten, String fileName) throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
@@ -22,23 +22,23 @@ public class AusgangsrechnungWriter {
                 .get();
 
         try (CSVPrinter csvPrinter = new CSVPrinter(fileWriter, csvFormat)){
-            for (Bmd55SatzartIBUBuchungssatz satzArt : satzArten) {
+            for (NtscFiBuRecord satzArt : satzArten) {
                 // Write each person's data to the CSV file
                 csvPrinter.printRecord(
                         satzArt.getSatzart(),
                         satzArt.getKonto(),
                         satzArt.getBuchdatFormated(),
-                        satzArt.getGkto(),
+                        satzArt.getGkonto(),
                         satzArt.getBelegnr(),
                         satzArt.getBelegdatFormated(),
-                        satzArt.getMwst(),
-                        satzArt.getSteucod(),
-                        satzArt.getBucod(),
+                        satzArt.getSteuer(),
+                        satzArt.getSteuercode(),
+                        satzArt.getBuchcode(),
                         satzArt.getBetrag(),
                         satzArt.getSteuer(),
                         satzArt.getSkonto(),
                         satzArt.getText(),
-                        satzArt.getSymbol(),
+                        satzArt.getBuchsymbol(),
                         satzArt.getExtbelegnr(),
                         satzArt.getKost(),
                         ""
