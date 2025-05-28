@@ -9,7 +9,6 @@ import at.transparentdesign.tdtools.satz.NtscFiBuRecord;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
