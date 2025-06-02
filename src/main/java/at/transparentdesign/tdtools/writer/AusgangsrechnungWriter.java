@@ -31,7 +31,7 @@ public class AusgangsrechnungWriter {
                         satzArt.getGkonto(),
                         satzArt.getBelegnr(),
                         satzArt.getBelegdatFormated(),
-                        satzArt.getSteuer(),
+                        satzArt.getProzent(),
                         satzArt.getSteuercode(),
                         satzArt.getBuchcode(),
                         satzArt.getBetrag(),
