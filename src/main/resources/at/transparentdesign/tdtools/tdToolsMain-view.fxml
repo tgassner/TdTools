@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
@@ -17,15 +18,17 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
             <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" prefHeight="28.0" prefWidth="760.0">
-                <Button fx:id="loadInputFileButton" onAction="#onLoadInputFileButtonClick" prefHeight="25.0" minWidth="160" prefWidth="160.0" maxWidth="160" text="BMD 5.5 Datei laden" textAlignment="CENTER" />
+                <Button fx:id="loadInputFileButton" maxWidth="160" minWidth="160" onAction="#onLoadInputFileButtonClick" prefHeight="25.0" prefWidth="160.0" text="BMD 5.5 Datei laden" textAlignment="CENTER" />
                 <TextField fx:id="inputFileTextField" disable="true" editable="false" prefHeight="25.0" prefWidth="619.0" />
                 <Button fx:id="copyInputFileToClipboard" mnemonicParsing="false" onAction="#copyInputFileToClipboard" prefHeight="25.0" prefWidth="25.0" />
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="60.0" prefHeight="28.0" prefWidth="760.0">
-               <Button fx:id="doBookingConvertationButton" disable="true" onAction="#onDoBookingConvertationClick" prefHeight="25.0" minWidth="160" prefWidth="160.0" maxWidth="160" text="Konvertieren" />
+               <Button fx:id="doBookingConvertationButton" disable="true" maxWidth="160" minWidth="160" onAction="#onDoBookingConvertationClick" prefHeight="25.0" prefWidth="160.0" text="Konvertieren" />
+            <Label prefHeight="17.0" prefWidth="222.0" />
+            <Button fx:id="bmd55PreviewButton" onAction="#onBmd55PreviewButton" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="BMD 5.5 Datei ansehen" />
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="100.0" prefHeight="28.0" prefWidth="760.0">
-                <Button fx:id="saveOutputFileButton" disable="true" onAction="#onSaveOutputFileButtonClick" prefHeight="25.0" minWidth="160" prefWidth="160.0" maxWidth="160" text="Speichern" textAlignment="CENTER" />
+                <Button fx:id="saveOutputFileButton" disable="true" maxWidth="160" minWidth="160" onAction="#onSaveOutputFileButtonClick" prefHeight="25.0" prefWidth="160.0" text="Speichern" textAlignment="CENTER" />
                 <TextField fx:id="outputFileTextField" disable="true" editable="false" prefHeight="25.0" prefWidth="619.0" />
                 <Button fx:id="copyOutputFileToClipboard" mnemonicParsing="false" onAction="#copyOutputFileToClipboard" prefHeight="25.0" prefWidth="25.0" />
             </HBox>
