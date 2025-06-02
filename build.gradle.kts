@@ -47,13 +47,7 @@ dependencies {
         exclude(group = "org.openjfx")
     }
     implementation("org.apache.commons:commons-lang3:3.17.0")
-    implementation("commons-cli:commons-cli:1.9.0")
     implementation("org.apache.commons:commons-csv:1.14.0")
-    implementation("org.apache.commons:commons-text:1.13.1")
-    implementation("org.apache.commons:commons-collections4:4.5.0")
-    implementation("org.apache.commons:commons-configuration2:2.12.0")
-    implementation("commons-io:commons-io:2.19.0")
-    implementation("commons-beanutils:commons-beanutils:1.10.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

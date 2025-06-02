@@ -6,6 +6,7 @@ import at.transparentdesign.tdtools.loader.FileLoader;
 import at.transparentdesign.tdtools.parser.Satzart0FiBuBuchungssatzParser;
 import at.transparentdesign.tdtools.satz.Bmd55FiBuRecord;
 import at.transparentdesign.tdtools.satz.NtscFiBuRecord;
+import at.transparentdesign.tdtools.tools.ApplicationDirectories;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,33 +16,29 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.FileChooser;
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.FileBasedConfiguration;
-import org.apache.commons.configuration2.PropertiesConfiguration;
-import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
-import org.apache.commons.configuration2.builder.fluent.Parameters;
-import org.apache.commons.configuration2.convert.DefaultListDelimiterHandler;
-import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import java.io.File;
+import java.io.*;
+import java.net.URL;
 import java.nio.charset.MalformedInputException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class TdToolsMainController {
 
+    Properties prop = new Properties();
+
+    /*
     FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
             new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
                     .configure(new Parameters().properties()
                             .setFileName("tdTools.properties")
                             .setListDelimiterHandler(new DefaultListDelimiterHandler(',')));
-
+*/
     @FXML
     public TextArea bookingBmd55ToNTSCtextArea;
     @FXML
@@ -64,6 +61,10 @@ public class TdToolsMainController {
     private List<Bmd55FiBuRecord> bmd55Records;
     private List<NtscFiBuRecord> ntscRecords;
 
+    public TdToolsMainController() {
+
+    }
+
     @FXML
     protected void initialize() {
 
@@ -76,6 +77,25 @@ public class TdToolsMainController {
         imageViewCopyOutputFilePathToClipboard.setFitHeight(16);
         imageViewCopyOutputFilePathToClipboard.setFitWidth(16);
         this.copyOutputFileToClipboard.setGraphic(imageViewCopyOutputFilePathToClipboard);
+
+        Path propertyPath = Paths.get(getPropertyPath());
+        if (Files.exists(propertyPath)) {
+            try (InputStream  stream = new FileInputStream(propertyPath.toString())) {
+                prop.load(stream);
+                appendGuiLog("Loaded Properties File from Config Dir: " + propertyPath);
+            } catch (IOException e) {
+                appendGuiLog(e);
+            }
+        } else {
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            try (InputStream stream = loader.getResourceAsStream("tdTools.properties")) {
+                prop.load(stream);
+                appendGuiLog("Load Properties File by ClassLoader : " + Thread.currentThread().getContextClassLoader().getResource("tdTools.properties").getPath());
+            } catch (IOException e) {
+                appendGuiLog(e);
+            }
+        }
+
     }
 
     @FXML
@@ -212,26 +232,33 @@ public class TdToolsMainController {
         storeProperty("BMD55InputFilePath", bmd55InputFilePath.getParent().toString());
     }
 
+    private String getPropertyPath() {
+        Path path = ApplicationDirectories.configDir("TdTools");
+        return path.toAbsolutePath().toString() + FileSystems.getDefault().getSeparator() + "tdTools.properties";
+    }
+
     private void storeProperty(String key, String value) {
+        prop.setProperty(key, value);
+        String propertyPathString = getPropertyPath();
+        Path propertyPath = Paths.get(propertyPathString);
         try {
-            Configuration config = getConfiguration();
-            config.setProperty(key, value);
-            builder.save();
-        } catch (ConfigurationException e) {
-            // Schlucken.. what shells
+            if (!Files.exists(propertyPath.getParent())) {
+                Files.createDirectories(propertyPath.getParent());
+            }
+
+            if (!Files.exists(propertyPath)) {
+                Files.createFile(propertyPath);
+            }
+            prop.store(new FileOutputStream(propertyPathString), null);
+
+        } catch (IOException e) {
+            appendGuiLog(e);
+            throw new RuntimeException(e);
         }
     }
 
     private String loadBmd55InputFilePath() {
-        try {
-            return getConfiguration().getString("BMD55InputFilePath");
-        } catch (ConfigurationException e) {
-            return StringUtils.EMPTY;
-        }
-    }
-
-    private Configuration getConfiguration() throws ConfigurationException {
-        return builder.getConfiguration();
+        return this.prop.getProperty("BMD55InputFilePath");
     }
 
     private void appendGuiLog(Exception e) {
