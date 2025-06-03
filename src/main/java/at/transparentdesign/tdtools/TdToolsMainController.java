@@ -5,6 +5,7 @@ import at.transparentdesign.tdtools.loader.Bmd55FileLoader;
 import at.transparentdesign.tdtools.loader.FileLoader;
 import at.transparentdesign.tdtools.parser.Satzart0FiBuBuchungssatzParser;
 import at.transparentdesign.tdtools.satz.Bmd55FiBuRecord;
+import at.transparentdesign.tdtools.satz.FiBuRecordFields;
 import at.transparentdesign.tdtools.satz.NtscFiBuRecord;
 import at.transparentdesign.tdtools.tools.ApplicationDirectories;
 import at.transparentdesign.tdtools.writer.AusgangsrechnungWriter;
@@ -17,18 +18,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.*;
 import java.nio.charset.MalformedInputException;
@@ -36,7 +29,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.*;
 
 public class TdToolsMainController {
@@ -44,7 +36,9 @@ public class TdToolsMainController {
     Properties prop = new Properties();
 
     @FXML
-    public Button bmd55PreviewButton;
+    public Button ntscQuickViewButton;
+    @FXML
+    public Button bmd55QuickViewButton;
     @FXML
     public TextArea bookingBmd55ToNTSCtextArea;
     @FXML
@@ -66,6 +60,8 @@ public class TdToolsMainController {
 
     private List<Bmd55FiBuRecord> bmd55Records;
     private List<NtscFiBuRecord> ntscRecords;
+    private TableView<Bmd55FiBuRecord> bmd55TableView;
+    private TableView<NtscFiBuRecord> ntscTableView;
 
     public TdToolsMainController() {
 
@@ -111,6 +107,9 @@ public class TdToolsMainController {
         appendGuiLog(this.ntscRecords.size() + " Datenzeilen konvertiert.");
         this.doBookingConvertationButton.setDisable(true);
         this.saveOutputFileButton.setDisable(false);
+        this.ntscQuickViewButton.setDisable(false);
+        this.copyInputFileToClipboard.setDisable(false);
+        this.copyOutputFileToClipboard.setDisable(true);
         this.outputFileTextField.setText(StringUtils.EMPTY);
     }
 
@@ -174,7 +173,10 @@ public class TdToolsMainController {
         storeBmd55InputFilePath(inputPath);
         this.doBookingConvertationButton.setDisable(false);
         this.saveOutputFileButton.setDisable(true);
-        this.bmd55PreviewButton.setDisable(false);
+        this.bmd55QuickViewButton.setDisable(false);
+        this.ntscQuickViewButton.setDisable(true);
+        this.copyInputFileToClipboard.setDisable(false);
+        this.copyOutputFileToClipboard.setDisable(true);
     }
 
     @FXML
@@ -217,6 +219,12 @@ public class TdToolsMainController {
         appendGuiLog("Datei geschrieben: " + outputFilePath.toAbsolutePath());
 
         outputFileTextField.setText(file.getAbsolutePath());
+
+        this.doBookingConvertationButton.setDisable(true);
+        this.saveOutputFileButton.setDisable(false);
+        this.ntscQuickViewButton.setDisable(false);
+        this.copyInputFileToClipboard.setDisable(false);
+        this.copyOutputFileToClipboard.setDisable(false);
     }
 
     private boolean messageBox(String title, String header, String content, Alert.AlertType alertType) {
@@ -287,103 +295,162 @@ public class TdToolsMainController {
         copyStringToClipboard(this.outputFileTextField.getText());
     }
 
-    public void onBmd55PreviewButton(ActionEvent actionEvent) {
+    @FXML
+    public void onBmd55QuickViewButton(ActionEvent actionEvent) {
 
         Pane pane = new Pane();
-        Scene scene = new Scene(pane, 1320, 600);
+        Scene scene = new Scene(pane, 1300, 600);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("BMD 5.5 Ansicht");
-        stage.setMaxWidth(1520);
 
-        TableView<Bmd55FiBuRecord> tableView = new TableView<>();
-        tableView.setMaxWidth(1500);
-        tableView.setPrefWidth(1300);
-        //tableView.setPrefHeight(200);
+        this.bmd55TableView = new TableView<>();
+        bmd55TableView.setPrefWidth(1300);
+        bmd55TableView.setPrefHeight(600);
 
-        defileBmd55Column("Satzart", "satzart", tableView);
-        defileBmd55Column("Konto", "konto", tableView);
-        defileBmd55Column("buchdat", "buchdat", tableView);
-        defileBmd55Column("gkto", "gkto", tableView);
-        defileBmd55Column("belegnr", "belegnr", tableView);
-        defileBmd55Column("belegdat", "belegdat", tableView);
-        defileBmd55Column("kost", "kost", tableView);
-        defileBmd55Column("unused1", "unused1", tableView);
-        defileBmd55Column("kotraeger", "kotraeger", tableView);
-        defileBmd55Column("komenge", "komenge", tableView);
-        defileBmd55Column("komengenr", "komengenr", tableView);
-        defileBmd55Column("kovariator", "kovariator", tableView);
-        defileBmd55Column("koperiode", "koperiode", tableView);
-        defileBmd55Column("komonteiler", "komonteiler", tableView);
-        defileBmd55Column("mwst", "mwst", tableView);
-        defileBmd55Column("steucod", "steucod", tableView);
-        defileBmd55Column("ebkennz", "ebkennz", tableView);
-        defileBmd55Column("bucod", "bucod", tableView);
-        defileBmd55Column("betrag", "betrag", tableView);
-        defileBmd55Column("steuer", "steuer", tableView);
-        defileBmd55Column("skonto", "skonto", tableView);
-        defileBmd55Column("opbetrag", "opbetrag", tableView);
-        defileBmd55Column("periode", "periode", tableView);
-        defileBmd55Column("kursnr", "kursnr", tableView);
-        defileBmd55Column("fwkurs", "fwkurs", tableView);
-        defileBmd55Column("fwfaktor", "fwfaktor", tableView);
-        defileBmd55Column("fwbetrag", "fwbetrag", tableView);
-        defileBmd55Column("fwsteuer", "fwsteuer", tableView);
-        defileBmd55Column("fwskonto", "fwskonto", tableView);
-        defileBmd55Column("fwopbetr", "fwopbetr", tableView);
-        defileBmd55Column("landkz", "landkz", tableView);
-        defileBmd55Column("lkzkurs", "lkzkurs", tableView);
-        defileBmd55Column("lkzfaktor", "lkzfaktor", tableView);
-        defileBmd55Column("text", "text", tableView);
-        defileBmd55Column("symbol", "symbol", tableView);
-        defileBmd55Column("extbelegnr", "extbelegnr", tableView);
-        defileBmd55Column("zesskz", "zesskz", tableView);
-        defileBmd55Column("zziel", "zziel", tableView);
-        defileBmd55Column("skontopz", "skontopz", tableView);
-        defileBmd55Column("skontotage", "skontotage", tableView);
-        defileBmd55Column("skontopz2", "skontopz2", tableView);
-        defileBmd55Column("skontotage2", "skontotage2", tableView);
-        defileBmd55Column("valutadatum", "valutadatum", tableView);
-        defileBmd55Column("wechseldatum", "wechseldatum", tableView);
-        defileBmd55Column("vertnr", "vertnr", tableView);
-        defileBmd55Column("provpz", "provpz", tableView);
-        defileBmd55Column("auftkz", "auftkz", tableView);
-        defileBmd55Column("auftnr", "auftnr", tableView);
-        defileBmd55Column("zmart", "zmart", tableView);
-        defileBmd55Column("zmbericht", "zmbericht", tableView);
-        defileBmd55Column("menge", "menge", tableView);
-        defileBmd55Column("benutzer", "benutzer", tableView);
-        defileBmd55Column("buchart", "buchart", tableView);
-        defileBmd55Column("buchkz", "buchkz", tableView);
-        defileBmd55Column("mahnz", "mahnz", tableView);
-        defileBmd55Column("leistdat", "leistdat", tableView);
-        defileBmd55Column("uvaPeriode", "uvaPeriode", tableView);
-        defileBmd55Column("uidnr", "uidnr", tableView);
-        defileBmd55Column("steuerart", "steuerart", tableView);
-        defileBmd55Column("korekonto", "korekonto", tableView);
-        defileBmd55Column("erZahlbank", "erZahlbank", tableView);
-        defileBmd55Column("bauSteucod", "bauSteucod", tableView);
-        defileBmd55Column("unused2", "unused2", tableView);
-        defileBmd55Column("vstAbzugpz", "vstAbzugpz", tableView);
-        defileBmd55Column("zvMahnsp", "zvMahnsp", tableView);
-        defileBmd55Column("erSteukorrKz", "erSteukorrKz", tableView);
-        defileBmd55Column("gegenbuchkz", "gegenbuchkz", tableView);
-        defileBmd55Column("verbuchkz", "verbuchkz", tableView);
-        defileBmd55Column("unused3", "unused3", tableView);
-        defileBmd55Column("unused4", "unused4", tableView);
-
-
+        defileBmd55Column("Satzart", "satzart", bmd55TableView);
+        defileBmd55Column("Konto", "konto", bmd55TableView);
+        defileBmd55Column("buchdat", "buchdat", bmd55TableView);
+        defileBmd55Column("gkto", "gkto", bmd55TableView);
+        defileBmd55Column("belegnr", "belegnr", bmd55TableView);
+        defileBmd55Column("belegdat", "belegdat", bmd55TableView);
+        defileBmd55Column("kost", "kost", bmd55TableView);
+        defileBmd55Column("unused1", "unused1", bmd55TableView);
+        defileBmd55Column("kotraeger", "kotraeger", bmd55TableView);
+        defileBmd55Column("komenge", "komenge", bmd55TableView);
+        defileBmd55Column("komengenr", "komengenr", bmd55TableView);
+        defileBmd55Column("kovariator", "kovariator", bmd55TableView);
+        defileBmd55Column("koperiode", "koperiode", bmd55TableView);
+        defileBmd55Column("komonteiler", "komonteiler", bmd55TableView);
+        defileBmd55Column("mwst", "mwst", bmd55TableView);
+        defileBmd55Column("steucod", "steucod", bmd55TableView);
+        defileBmd55Column("ebkennz", "ebkennz", bmd55TableView);
+        defileBmd55Column("bucod", "bucod", bmd55TableView);
+        defileBmd55Column("betrag", "betrag", bmd55TableView);
+        defileBmd55Column("steuer", "steuer", bmd55TableView);
+        defileBmd55Column("skonto", "skonto", bmd55TableView);
+        defileBmd55Column("opbetrag", "opbetrag", bmd55TableView);
+        defileBmd55Column("periode", "periode", bmd55TableView);
+        defileBmd55Column("kursnr", "kursnr", bmd55TableView);
+        defileBmd55Column("fwkurs", "fwkurs", bmd55TableView);
+        defileBmd55Column("fwfaktor", "fwfaktor", bmd55TableView);
+        defileBmd55Column("fwbetrag", "fwbetrag", bmd55TableView);
+        defileBmd55Column("fwsteuer", "fwsteuer", bmd55TableView);
+        defileBmd55Column("fwskonto", "fwskonto", bmd55TableView);
+        defileBmd55Column("fwopbetr", "fwopbetr", bmd55TableView);
+        defileBmd55Column("landkz", "landkz", bmd55TableView);
+        defileBmd55Column("lkzkurs", "lkzkurs", bmd55TableView);
+        defileBmd55Column("lkzfaktor", "lkzfaktor", bmd55TableView);
+        defileBmd55Column("text", "text", bmd55TableView);
+        defileBmd55Column("symbol", "symbol", bmd55TableView);
+        defileBmd55Column("extbelegnr", "extbelegnr", bmd55TableView);
+        defileBmd55Column("zesskz", "zesskz", bmd55TableView);
+        defileBmd55Column("zziel", "zziel", bmd55TableView);
+        defileBmd55Column("skontopz", "skontopz", bmd55TableView);
+        defileBmd55Column("skontotage", "skontotage", bmd55TableView);
+        defileBmd55Column("skontopz2", "skontopz2", bmd55TableView);
+        defileBmd55Column("skontotage2", "skontotage2", bmd55TableView);
+        defileBmd55Column("valutadatum", "valutadatum", bmd55TableView);
+        defileBmd55Column("wechseldatum", "wechseldatum", bmd55TableView);
+        defileBmd55Column("vertnr", "vertnr", bmd55TableView);
+        defileBmd55Column("provpz", "provpz", bmd55TableView);
+        defileBmd55Column("auftkz", "auftkz", bmd55TableView);
+        defileBmd55Column("auftnr", "auftnr", bmd55TableView);
+        defileBmd55Column("zmart", "zmart", bmd55TableView);
+        defileBmd55Column("zmbericht", "zmbericht", bmd55TableView);
+        defileBmd55Column("menge", "menge", bmd55TableView);
+        defileBmd55Column("benutzer", "benutzer", bmd55TableView);
+        defileBmd55Column("buchart", "buchart", bmd55TableView);
+        defileBmd55Column("buchkz", "buchkz", bmd55TableView);
+        defileBmd55Column("mahnz", "mahnz", bmd55TableView);
+        defileBmd55Column("leistdat", "leistdat", bmd55TableView);
+        defileBmd55Column("uvaPeriode", "uvaPeriode", bmd55TableView);
+        defileBmd55Column("uidnr", "uidnr", bmd55TableView);
+        defileBmd55Column("steuerart", "steuerart", bmd55TableView);
+        defileBmd55Column("korekonto", "korekonto", bmd55TableView);
+        defileBmd55Column("erZahlbank", "erZahlbank", bmd55TableView);
+        defileBmd55Column("bauSteucod", "bauSteucod", bmd55TableView);
+        defileBmd55Column("unused2", "unused2", bmd55TableView);
+        defileBmd55Column("vstAbzugpz", "vstAbzugpz", bmd55TableView);
+        defileBmd55Column("zvMahnsp", "zvMahnsp", bmd55TableView);
+        defileBmd55Column("erSteukorrKz", "erSteukorrKz", bmd55TableView);
+        defileBmd55Column("gegenbuchkz", "gegenbuchkz", bmd55TableView);
+        defileBmd55Column("verbuchkz", "verbuchkz", bmd55TableView);
+        defileBmd55Column("unused3", "unused3", bmd55TableView);
+        defileBmd55Column("unused4", "unused4", bmd55TableView);
 
         for (Bmd55FiBuRecord bmd55FiBuRecord : bmd55Records) {
-            tableView.getItems().add(bmd55FiBuRecord);
+            bmd55TableView.getItems().add(bmd55FiBuRecord);
         }
 
-        pane.getChildren().add(tableView);
+        pane.getChildren().add(bmd55TableView);
+
+        stage.getIcons().add(new Image("icon.png"));
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        pane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            //messageBox(oldValue + "", newValue + "", "", Alert.AlertType.INFORMATION);
+            this.bmd55TableView.setPrefWidth(newValue.doubleValue());
+        });
+
+        pane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            //messageBox(oldValue + "", newValue + "", "", Alert.AlertType.INFORMATION);
+            this.bmd55TableView.setPrefHeight(newValue.doubleValue());
+        });
 
         stage.show();
     }
 
-    private static void defileBmd55Column(String header, String reflectionValue, TableView<Bmd55FiBuRecord> tableView) {
+    @FXML
+    public void onNtscQuickViewButton(ActionEvent actionEvent) {
+        Pane pane = new Pane();
+        Scene scene = new Scene(pane, 1300, 600);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("NTSC Ansicht");
+
+        this.ntscTableView = new TableView<>();
+        ntscTableView.setPrefWidth(1300);
+        ntscTableView.setPrefHeight(600);
+
+        defileNtscColumn(FiBuRecordFields.SATZART.getNtcsBookingheaderElement(), "satzart", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.KONTO.getNtcsBookingheaderElement(), "konto", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.BUCHDAT.getNtcsBookingheaderElement(), "buchdatum", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.GKTO.getNtcsBookingheaderElement(), "gkonto", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.BELEGNR.getNtcsBookingheaderElement(), "belegnr", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.BELEGDAT.getNtcsBookingheaderElement(), "belegdatum", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.MWST.getNtcsBookingheaderElement(), "prozent", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.STEUCOD.getNtcsBookingheaderElement(), "steuercode", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.BUCOD.getNtcsBookingheaderElement(), "buchcode", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.BETRAG.getNtcsBookingheaderElement(), "betrag", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.STEUER.getNtcsBookingheaderElement(), "steuer", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.SKONTO.getNtcsBookingheaderElement(), "skonto", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.TEXT.getNtcsBookingheaderElement(), "text", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.SYMBOL.getNtcsBookingheaderElement(), "buchsymbol", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.EXTBELEGNR.getNtcsBookingheaderElement(), "extbelegnr", ntscTableView);
+        defileNtscColumn(FiBuRecordFields.KOST.getNtcsBookingheaderElement(), "kost", ntscTableView);
+
+        for (NtscFiBuRecord ntscFiBuRecord : ntscRecords) {
+            ntscTableView.getItems().add(ntscFiBuRecord);
+        }
+
+        pane.getChildren().add(ntscTableView);
+
+        stage.getIcons().add(new Image("icon.png"));
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        pane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            this.ntscTableView.setPrefWidth(newValue.doubleValue());
+        });
+
+        pane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            this.ntscTableView.setPrefHeight(newValue.doubleValue());
+        });
+
+        stage.show();
+    }
+
+    private void defileBmd55Column(String header, String reflectionValue, TableView<Bmd55FiBuRecord> tableView) {
         TableColumn<Bmd55FiBuRecord, String> column1 =
                 new TableColumn<>(header);
 
@@ -391,4 +458,14 @@ public class TdToolsMainController {
                 new PropertyValueFactory<>(reflectionValue));
         tableView.getColumns().add(column1);
     }
+
+    private void defileNtscColumn(String header, String reflectionValue, TableView<NtscFiBuRecord> tableView) {
+        TableColumn<NtscFiBuRecord, String> column1 =
+                new TableColumn<>(header);
+
+        column1.setCellValueFactory(
+                new PropertyValueFactory<>(reflectionValue));
+        tableView.getColumns().add(column1);
+    }
+
 }

@@ -29,8 +29,6 @@ public class TdToolsApplication extends Application {
     }
 
     public static void main(String[] args) {
-
-
         launch();
     }
 }
